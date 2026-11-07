@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skymanaditya1.github.io/proxy-website/sitemap.xml

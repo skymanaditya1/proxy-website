@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PROXY: Learning Object-Centric Manipulation Policies from a Single RGB-D Image</title>
+<meta name="description" content="PROXY learns an object-centric robot manipulation policy from a single RGB-D image and a sentence describing the task, using generated videos in place of real demonstrations. Accepted at the RSS 2026 Diffusion for Robot Learning and Data-Centric Robotics workshops.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fbfaf7">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#141413">
+<link rel="canonical" href="https://skymanaditya1.github.io/proxy-website/">
+<meta property="og:title" content="PROXY: Learning Object-Centric Manipulation Policies from a Single RGB-D Image">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skymanaditya1.github.io/proxy-website/">
+<meta property="og:image" content="https://skymanaditya1.github.io/proxy-website/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Title card: PROXY, Learning Object-Centric Manipulation Policies from a Single RGB-D Image, next to four robot runs: a Franka Panda hooking a hanger and stacking bowls, a UR5 placing a mug under a coffee machine and pouring from a pitcher.">
+<meta property="og:description" content="PROXY turns one RGB-D image and a sentence describing the task into generated demonstration videos, and trains an object-centric manipulation policy on them. No real demonstrations are collected. Accepted at the RSS 2026 Diffusion for Robot Learning and Data-Centric Robotics workshops.">
+<meta property="og:site_name" content="PROXY">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/newsreader-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/hero.poster.webp" as="image" type="image/webp" fetchpriority="high">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  var d = document.documentElement;
+  try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t); } catch (e) {}
+  // A stored theme overrides the OS one, so the toolbar colour has to follow it (main.js does the same on toggle).
+  if (t === 'light' || t === 'dark') {
+    var m = document.querySelectorAll('meta[name="theme-color"]');
+    for (var i = 0; i < m.length; i++) m[i].setAttribute('content', t === 'dark' ? '#141413' : '#fbfaf7');
+  }
+})();
+</script>
+<script src="main.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "PROXY: Learning Object-Centric Manipulation Policies from a Single RGB-D Image",
+  "name": "PROXY: Learning Object-Centric Manipulation Policies from a Single RGB-D Image",
+  "description": "PROXY learns a task-specific, object-centric manipulation policy from a single RGB-D image and a natural-language task description, training on generated demonstration videos instead of real-world data.",
+  "url": "https://skymanaditya1.github.io/proxy-website/",
+  "image": "https://skymanaditya1.github.io/proxy-website/img/og.png",
+  "inLanguage": "en",
+  "sourceOrganization": {"@type": "Organization", "name": "MIT CSAIL Learning and Intelligent Systems (LIS) Lab", "url": "https://lis.csail.mit.edu/"},
+  "author": [
+    {"@type": "Person", "name": "Maggie Huili Yao", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Sahit Chintalapudi", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Tiffany Zhang", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Akash Anand", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Megha Tippur", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Tomás Lozano-Pérez", "url": "https://people.csail.mit.edu/tlp/", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Leslie Pack Kaelbling", "url": "https://people.csail.mit.edu/lpk/", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}},
+    {"@type": "Person", "name": "Aditya Agarwal", "url": "https://skymanaditya1.github.io", "affiliation": {"@type": "Organization", "name": "MIT Computer Science and Artificial Intelligence Laboratory (CSAIL)"}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="masthead wrap">
+  <div class="masthead-top">
+    <button class="btn btn-icon theme-toggle" type="button" id="theme-toggle" aria-label="Switch to dark theme" hidden>
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+  <h1>PROXY</h1>
+  <p class="subtitle">Learning Object-Centric Manipulation Policies from a Single RGB-D Image</p>
+  <p class="authors">
+    <span class="author-row"><span>Maggie Huili Yao,</span> <span>Sahit Chintalapudi,</span> <span>Tiffany Zhang,</span> <span>Akash Anand,</span> <span>Megha Tippur,</span></span>
+    <span class="author-row"><span><a href="https://people.csail.mit.edu/tlp/">Tomás Lozano-Pérez</a>,</span> <span><a href="https://people.csail.mit.edu/lpk/">Leslie Pack Kaelbling</a>,</span> <span><a href="https://skymanaditya1.github.io">Aditya Agarwal</a></span></span>
+  </p>
+  <p class="affil"><span class="affil-item"><img class="logo logo-lis" src="img/lis-logo.svg" alt="" width="141" height="90"><a href="https://lis.csail.mit.edu/">Learning and Intelligent Systems (LIS) Lab, CSAIL</a></span><span class="affil-gap"></span><span class="affil-item"><img class="logo logo-mit" src="img/mit-logo.webp" alt="" width="800" height="414"><span>Massachusetts Institute of Technology</span></span></p>
+  <p class="affil venue">Accepted at the RSS 2026<img class="logo logo-rss" src="img/rss-2026-logo.webp" alt="" width="800" height="189"> <a href="https://rss2026-diffusion-robot-learning.github.io/">Diffusion for Robot Learning</a> and <a href="https://rss-workshop-2026.github.io/">Data-Centric Robotics</a> workshops</p>
+  <ul class="btn-row">
+    <li><a class="btn" href="paper.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h8"/></svg>Paper</a></li>
+    <li><a class="btn" role="link" aria-disabled="true" title="arXiv version coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20"/></svg>arXiv <span class="soon"><span class="soon-pre">coming </span>soon</span></a></li>
+    <li><a class="btn" role="link" aria-disabled="true" title="Code release coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>Code <span class="soon"><span class="soon-pre">coming </span>soon</span></a></li>
+    <li><a class="btn" role="link" aria-disabled="true" title="Thread coming soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Thread <span class="soon"><span class="soon-pre">coming </span>soon</span></a></li>
+    <li><a class="btn" role="link" aria-disabled="true" title="Video coming soon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>YouTube <span class="soon"><span class="soon-pre">coming </span>soon</span></a></li>
+    <li><a class="btn" href="#bibtex"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h9l5 5v11a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M9 13h6M9 17h6"/></svg>BibTeX</a></li>
+  </ul>
+
+  <nav class="sitenav" aria-label="Sections">
+    <ul>
+      <li><a href="#how"><span class="num">01</span>How PROXY works</a></li>
+      <li><a href="#tasks"><span class="num">02</span>Tasks</a></li>
+      <li><a href="#results"><span class="num">03</span>Results</a></li>
+      <li><a href="#wider"><span class="num">04</span>Wider starting distribution</a></li>
+      <li><a href="#rollouts"><span class="num">05</span>More rollouts</a></li>
+      <li><a href="#limitations"><span class="num">06</span>Limitations</a></li>
+      <li><a href="#bibtex"><span class="num">07</span>BibTeX</a></li>
+    </ul>
+    <details>
+      <summary>Contents</summary>
+      <ul>
+        <li><a href="#how"><span class="num">01</span>How PROXY works</a></li>
+        <li><a href="#tasks"><span class="num">02</span>Tasks</a></li>
+        <li><a href="#results"><span class="num">03</span>Results</a></li>
+        <li><a href="#wider"><span class="num">04</span>Wider starting distribution</a></li>
+        <li><a href="#rollouts"><span class="num">05</span>More rollouts</a></li>
+        <li><a href="#limitations"><span class="num">06</span>Limitations</a></li>
+        <li><a href="#bibtex"><span class="num">07</span>BibTeX</a></li>
+      </ul>
+    </details>
+  </nav>
+
+  <div class="tldr">
+    <p>Robot manipulation policies usually learn from tens to hundreds of demonstrations, and those demonstrations have to be collected again for every new task, environment and robot.</p>
+    <p>We introduce <span class="method-name">PROXY</span>, which learns a manipulation policy from one RGB-D image and a sentence describing the task. Generated videos stand in for real demonstrations, so there is no real-world data collection at all. PROXY rebuilds the two task objects as 3D meshes, places them in many new layouts, has a video model show the task being done, filters out implausible videos with a VLM, and trains an object-centric policy on the object motion it tracks in the rest.</p>
+  </div>
+</header>
+
+<main>
+
+<figure class="hero bleed">
+  <div class="plate">
+    <video id="hero-video" autoplay muted loop playsinline controls preload="metadata" poster="media/hero.poster.webp" width="1280" height="720" aria-label="Four PROXY runs in a two-by-two grid. Top left: a Franka Panda hooks a hanger on a rack. Top right: a Franka Panda stacks a yellow bowl inside a blue bowl. Bottom left: a UR5 places a mug under a coffee machine. Bottom right: a UR5 tilts a pitcher over a mug to pour.">
+      <source src="media/hero.v1.webm" type="video/webm">
+      <source src="media/hero.v1.mp4" type="video/mp4">
+    </video>
+    <div class="quads" aria-hidden="true"><span class="q q1">Franka Panda · Hook</span><span class="q q2">Franka Panda · Stack</span><span class="q q3">UR5 · Place</span><span class="q q4">UR5 · Pour</span></div>
+    <button class="btn media-ctrl" type="button" id="hero-toggle" data-paused="false" aria-controls="hero-video" hidden>
+      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <span class="lbl-pause">Pause</span><span class="lbl-play">Play</span><span class="visually-hidden"> the four-run video</span>
+    </button>
+  </div>
+  <figcaption><b>Four PROXY runs on two robots.</b> Franka Panda: Hook and Stack. UR5: Place and Pour. Each policy was trained from a single RGB-D image and a task description, with no real demonstrations.</figcaption>
+</figure>
+
+<section class="abstract wrap" aria-labelledby="abstract-h">
+  <h2 id="abstract-h">Abstract</h2>
+  <p class="lede">Robot manipulation policies conventionally rely on tens to hundreds of teleoperated or kinesthetically guided demonstrations, a manual burden that must be repeated for each new task, environment, and robot embodiment. Recent methods mitigate this by learning robot-agnostic, object-centric policies from human demonstration videos, yet collecting such videos still requires manual effort and captures a limited distribution of object configurations. We argue that video generative models can serve as a scalable replacement for human data collection, autonomously synthesizing diverse demonstrations across object placements at zero human cost. We introduce PROXY, a method that learns a task-specific policy from a single RGB-D image and a natural-language task description without any real-world data collection. PROXY autonomously reconstructs task-relevant object meshes, diversifies scene configurations, synthesizes demonstration videos via a video generative model, and filters implausible video samples through a multi-axis VLM-based verification stage, yielding training data for an object-centric diffusion policy over the relative pose trajectory between a held object and a fixture object. On four real-robot tasks across two embodiments, PROXY matches policies trained on an equivalent number of human demonstrations and outperforms a strong visuomotor baseline trained on real teleoperation data. Critically, broadening the scene-diversification range incurs no additional human cost yet yields out-of-distribution generalization that real-data baselines fail to achieve.</p>
+</section>
+
+<!-- 01 -->
+<section class="sec" id="how">
+  <div class="sec-head">
+    <span class="num">01</span>
+    <h2>How PROXY works</h2>
+    <p>Here’s the whole pipeline in one figure. Step through it, or skip to the details underneath.</p>
+  </div>
+  <div class="bleed walk" id="walk">
+    <fieldset class="step-tabs" hidden>
+      <legend>Pipeline step</legend>
+      <div class="seg">
+        <input type="radio" name="walk" id="walk-0" value="0" checked><label for="walk-0">Inputs</label>
+        <input type="radio" name="walk" id="walk-1" value="1"><label for="walk-1"><span class="cn">1</span> Meshes</label>
+        <input type="radio" name="walk" id="walk-2" value="2"><label for="walk-2"><span class="cn">2</span> Scenes</label>
+        <input type="radio" name="walk" id="walk-3" value="3"><label for="walk-3"><span class="cn">3</span> Video</label>
+        <input type="radio" name="walk" id="walk-4" value="4"><label for="walk-4"><span class="cn">6</span> Filter</label>
+        <input type="radio" name="walk" id="walk-5" value="5"><label for="walk-5"><span class="cn">4</span> Depth</label>
+        <input type="radio" name="walk" id="walk-6" value="6"><label for="walk-6"><span class="cn">5</span> Pose</label>
+        <input type="radio" name="walk" id="walk-7" value="7"><label for="walk-7">Policy</label>
+        <input type="radio" name="walk" id="walk-8" value="8"><label for="walk-8">Robot</label>
+      </div>
+    </fieldset>
+
+    <figure class="paperfig walk-fig">
+      <div class="plate walk-view">
+        <img src="img/system-1200.webp" srcset="img/system-1200.webp 1200w, img/system-1708.webp 1708w" sizes="(min-width: 72rem) 70rem, calc(100vw - 32px)" width="1200" height="583" loading="lazy" decoding="async" alt="Pipeline diagram. Inputs: an RGB image and a depth map of a mug and a coffee machine, with the prompt “Place the mug under the coffee machine”. Automated demonstration collection: (1) reconstructed meshes of the mug and machine, (2) a stack of diverse synthetic renders, (3) generated video frames of the mug lifted by thin wires under the machine, (4) depth maps of those frames, (5) tracked pose axes on both objects, (6) a VLM prompt whose first step, OBSERVE, asks it to examine the frame for duplication of the held object. Policy: relative pose trajectories of the mug drawn as coloured axes, labelled object pose trajectory diffusion policy. Bottom: closed-loop execution, where the policy maps the current object pose to a predicted goal pose and the robot action is retargeted, and an embodiment-agnostic rollout of the same task on a Franka Panda and a UR5.">
+        <div class="hl" hidden></div>
+      </div>
+      <figcaption><button class="btn enlarge" type="button" data-enlarge="img:img/system-1708.webp" hidden>Enlarge</button><b>The PROXY pipeline</b> (Fig. 2 of the paper), shown for Place.</figcaption>
+    </figure>
+
+    <div class="walk-nav" hidden>
+      <button class="btn" type="button" id="walk-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>Previous</button>
+      <p class="step-count" id="walk-count">Step 1 of 9</p>
+      <button class="btn" type="button" id="walk-next">Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <span class="ui muted">Arrow keys on the figure also move between steps.</span>
+    </div>
+
+    <ol class="walk-steps" id="walk-steps">
+      <li data-box="0.12,0.96,16.86,47.47">
+        <h3>Inputs</h3>
+        <p>PROXY gets one RGB-D image of the scene from a fixed camera and one sentence describing the task, here “Place the mug under the coffee machine.” That is all the real-world data it uses: no teleoperation and no human videos.</p>
+      </li>
+      <li data-box="19.09,6.75,12.59,15.06">
+        <h3><span class="cn">1</span> Object meshes</h3>
+        <p>Gemini 2.5 Flash reads the image and the sentence and names the two objects that matter: the held object, here the mug, and the fixture, the coffee machine. GroundedSAM segments both, SAM3D reconstructs a 3D mesh of each from the single image, and FoundationPose fits each mesh to the metric depth to get its starting pose.</p>
+      </li>
+      <li data-box="19.09,22.41,12.59,15.54">
+        <h3><span class="cn">2</span> Diverse scenes</h3>
+        <p>The two meshes go into a PyBullet scene with a planar table and a camera matched to the real one. Each object is moved by up to 0.05 m on the table and rotated by up to 20° about the <i>z</i>-axis, with collision checks, giving 25 physically plausible starting scenes. Blender renders each one as a conditioning image for the video model.</p>
+      </li>
+      <li data-box="31.67,6.75,33.49,15.06">
+        <h3><span class="cn">3</span> Video synthesis</h3>
+        <p>Wan 2.2 generates candidate videos of the task from the rendered scenes and a detailed prompt that Gemini 2.5 Flash writes from the task sentence and the image. The prompt describes the object as moved by thin suspended wires, so the motion has a visible cause and no hand or gripper hides the object. Videos are generated at 480p and 16 fps, then interpolated to 32 fps with RIFE.</p>
+      </li>
+      <li data-box="65.05,23.25,15.11,15.42">
+        <h3><span class="cn">6</span> VLM filtering</h3>
+        <p>GPT-5 scores every generated video on three axes, one for each common failure: the task is not completed, an object is duplicated or hallucinated, or the camera or the fixture drifts. Videos below the acceptance threshold are dropped. The figure numbers this step 6, but it runs right after video synthesis, so only accepted videos go on to depth and pose.</p>
+      </li>
+      <li data-box="31.67,22.53,33.49,15.06">
+        <h3><span class="cn">4</span> Depth</h3>
+        <p>Video Depth Anything estimates relative depth for every frame. A scale and a shift, fit in disparity space against the known depth of the two objects in the rendered scene, turn it into metric depth for the whole video.</p>
+      </li>
+      <li data-box="65.05,6.75,14.58,15.06">
+        <h3><span class="cn">5</span> Pose tracking</h3>
+        <p>FoundationPose tracks both objects through each accepted video, using the metric depth, the object masks and the meshes. A video is rejected if either object’s starting rotation is more than 30° from the Karcher mean of all starting rotations, which catches axis-flipped estimates. The pose of the held object relative to the fixture over time is one demonstration, and the 12 highest-scoring videos per task are kept.</p>
+      </li>
+      <li data-box="82.96,0.96,16.86,47.71">
+        <h3>Policy</h3>
+        <p>SPOT’s SE(3) diffusion policy is trained on the 12 generated demonstrations. Given the current pose of the held object relative to the fixture, it predicts the next four relative poses. An end-state classifier, trained alongside it, predicts when the task is complete.</p>
+      </li>
+      <li data-box="0.12,53.49,99.71,46.14">
+        <h3>Closed-loop execution on the robot</h3>
+        <p>Contact-GraspNet proposes grasps on the held object, and grasps that would collide with the scene or fail inverse kinematics anywhere along the predicted trajectory are discarded. After the grasp, FoundationPose re-estimates both object poses at every step, the policy predicts the next poses, and only the first one is executed, mapped to the gripper through inverse kinematics. When the end-state classifier signals completion, the robot lets go and retracts. The figure shows the same task on the Franka Panda and the UR5.</p>
+      </li>
+    </ol>
+
+  </div>
+
+  <div class="wrap method">
+    <h3>In more detail</h3>
+    <p><b>Problem.</b> PROXY trains a manipulation policy <i>π</i> from a single RGB-D image <b class="sym">I</b><sub>real</sub> of a tabletop scene and a short task description <i>ℓ</i>, using only generated demonstrations. Each task involves two objects: a held object <i>o</i><sub><i>h</i></sub>, which the robot grasps and moves, and a fixture <i>o</i><sub><i>f</i></sub>, which stays where it is. The policy works with the pose of the held object in the fixture’s frame:</p>
+    <div class="equation">
+      <math display="block">
+        <mrow>
+          <msubsup><mi>T</mi><mi>t</mi><mrow><mspace width="0.2em"></mspace><mtext>rel</mtext></mrow></msubsup><mo>=</mo>
+          <msubsup><mi>T</mi><mrow><mi>f</mi><mo>,</mo><mi>t</mi></mrow><mrow><mspace width="0.2em"></mspace><mo form="prefix" lspace="0" rspace="0">−</mo><mn>1</mn></mrow></msubsup>
+          <msub><mi>T</mi><mrow><mi>h</mi><mo>,</mo><mi>t</mi></mrow></msub><mo>,</mo>
+          <mspace width="2em"></mspace>
+          <mi>τ</mi><mo>=</mo>
+          <msubsup><mrow><mo>(</mo><msubsup><mi>T</mi><mi>t</mi><mrow><mspace width="0.2em"></mspace><mtext>rel</mtext></mrow></msubsup><mo>)</mo></mrow><mrow><mi>t</mi><mo lspace="0" rspace="0">=</mo><mn>1</mn></mrow><mi>T</mi></msubsup>
+        </mrow>
+      </math>
+      <span class="math-fallback">T<sub>t</sub><sup>rel</sup> = T<sub>f,t</sub><sup>−1</sup> T<sub>h,t</sub>,&emsp; τ = (T<sub>t</sub><sup>rel</sup>)<sub>t=1</sub><sup>T</sup></span>
+    </div>
+    <p>Here <i>T</i><sub><i>h</i>,<i>t</i></sub> and <i>T</i><sub><i>f</i>,<i>t</i></sub> ∈ SE(3) are the poses of the two objects at frame <i>t</i>. Written in the fixture’s frame, the trajectory <i>τ</i> does not depend on where the pair sits in the scene, only on how the held object moves relative to the fixture.</p>
+
+    <p><b>Object meshes.</b> Gemini 2.5 Flash identifies the two objects from <b class="sym">I</b><sub>real</sub> and <i>ℓ</i>, GroundedSAM segments them, and SAM3D reconstructs a mesh of each. FoundationPose then aligns each mesh with the metric depth map to get the object’s initial pose in the camera frame. The meshes are used twice: to render new scenes and, later, to track the objects in the generated videos.</p>
+
+    <p><b>Scene diversification.</b> A PyBullet simulation with a planar table holds the two meshes at their estimated poses, with the camera extrinsics matched to <b class="sym">I</b><sub>real</sub>. Each object gets collision-checked planar translations of up to 0.05 m and rotations of up to 20° about the <i>z</i>-axis, which gives 25 physically plausible starting scenes. Blender renders them as conditioning images for the video model. That is more scenes than the policy needs, so that enough demonstrations survive filtering.</p>
+  </div>
+  <figure class="bleed paperfig">
+    <div class="plate"><img src="img/diversify-1200.webp" srcset="img/diversify-1200.webp 1200w, img/diversify-2000.webp 2000w" sizes="(min-width: 72rem) 70rem, calc(100vw - 32px)" width="1200" height="225" loading="lazy" decoding="async" alt="Left, labelled initial image: the real photo of the Pour task, a green pitcher and a white mug on the Panda’s table. Right, labelled diversified renders: four rendered scenes in which the pitcher and the mug sit at different positions and orientations on a plain grey table."></div>
+    <figcaption><button class="btn enlarge" type="button" data-enlarge="img:img/diversify-2000.webp" hidden>Enlarge</button><b>Scene diversification.</b> Left: the real image of the Pour task. Right: diversified starting scenes, made by translating the recovered meshes on the table and rotating them about the <i>z</i>-axis, settling the result in PyBullet and rendering it in Blender with matched camera parameters.</figcaption>
+  </figure>
+
+  <div class="wrap method">
+    <div class="media-side">
+      <div>
+        <p><b>Video generation.</b> Wan 2.2, an open-source video generation model conditioned on an image and text, generates candidate videos from the 25 rendered scenes at 480p and 16 fps; 720p takes about four times longer and does not improve task adherence. Gemini 2.5 Flash expands <i>ℓ</i> and <b class="sym">I</b><sub>real</sub> into a detailed prompt, reused for every demonstration of a task. A rendered scene has no robot or person in it, so asking the model to move an object asks for motion with no cause, and the videos tend to show objects teleporting or floating. A human hand would provide the cause but would occlude the object and corrupt the depth estimate. The prompt instead describes the object as puppeteered by thin suspended wires, which gives clean object-only motion with the object in full view. RIFE then interpolates each video to 32 fps for reliable pose tracking.</p>
+        <p><b>VLM filtering.</b> Generated videos go wrong in three typical ways: the held object does not reach the goal configuration, an object is duplicated or hallucinated, or the camera or the fixture drifts. GPT-5 scores each candidate video along these three axes, with the same prompt for every task and only the task description filled in. Videos that do not meet the acceptance threshold are discarded.</p>
+      </div>
+      <figure class="paperfig">
+        <div class="plate"><img src="img/generated.webp" width="1086" height="754" loading="lazy" decoding="async" alt="A four-by-four grid of frames from generated videos, one row per task. Hook: a blue hanger rises on thin strings and settles on a white rack. Stack: a yellow bowl is lifted on strings and lowered into a blue bowl. Place: a blue mug is lifted on strings and set under a coffee machine. Pour: a green pitcher is lifted on strings and tipped over a white mug."></div>
+        <figcaption><button class="btn enlarge" type="button" data-enlarge="img:img/generated.webp" hidden>Enlarge</button><b>Generated videos</b> for Hook, Stack, Place and Pour, top to bottom. Thin strings descend from above and move the object: the suspended-wires prompt at work.</figcaption>
+      </figure>
+    </div>
+
+    <p><b>Depth and pose.</b> FoundationPose needs metric depth for every frame. Video Depth Anything can predict metric depth directly, but its output deviates significantly from the true depth of the conditioning frame, so PROXY uses its more robust relative mode and calibrates it. It solves for a scale <i>s</i> and a shift <i>b</i> in disparity space by least squares, using the metric depth of the two objects in the conditioning image <b class="sym">I</b><sub>0</sub><sup>(<i>j</i>)</sup>, masked to the object regions:</p>
+    <div class="equation">
+      <math display="block">
+        <mrow>
+          <mfrac><mn>1</mn><msub><mi>d</mi><mtext>metric</mtext></msub></mfrac><mo>=</mo>
+          <mi>b</mi><mo>+</mo><mi>s</mi><mo>·</mo><msub><mi>d</mi><mtext>relative</mtext></msub>
+        </mrow>
+      </math>
+      <span class="math-fallback">1 / d<sub>metric</sub> = b + s · d<sub>relative</sub></span>
+    </div>
+    <p>The fitted transform is applied to the whole video. FoundationPose then tracks both objects, given the metric-aligned depth, the object masks, the meshes and the camera intrinsics. It occasionally returns an axis-flipped initial pose, so PROXY computes the Karcher mean <i class="ovl">R</i> of the frame-0 rotations across the retained videos and rejects any video in which either object’s initial rotation is more than 30° from <i class="ovl">R</i>. Each remaining video gives a relative pose trajectory <i>τ</i><sup>(<i>j</i>)</sup>, and the 12 highest-scoring videos per task become the training demonstrations.</p>
+
+    <p><b>Policy.</b> PROXY trains SPOT’s SE(3) pose-trajectory diffusion policy on the 12 generated demonstrations. The policy takes the current relative pose <math display="inline"><msubsup><mi>T</mi><mi>t</mi><mrow><mspace width="0.2em"></mspace><mtext>rel</mtext></mrow></msubsup></math><span class="math-fallback">T<sub>t</sub><sup>rel</sup></span> and predicts the future trajectory with SE(3)-equivariant diffusion, over a horizon of four poses. Training uses DDIM with 100 denoising steps (10 at inference), a batch size of 128 and 3000 epochs. As in SPOT, an end-state classifier is trained to predict task completion from the current relative pose.</p>
+
+    <div class="media-side">
+      <div>
+        <p><b>Grasping.</b> Grasps are not learned, so the initial grasp has to work for the whole motion. Contact-GraspNet proposes grasps on the held object. PROXY forward-simulates the policy in open loop from the current state to predict the held object’s poses, and computes the matching end-effector trajectory for each grasp. A grasp is rejected if the gripper mesh collides with the scene at any predicted step, or if inverse kinematics finds no valid joint configuration somewhere along the trajectory because of joint limits or singularities. Of the grasps that remain, the one with the highest Contact-GraspNet confidence is executed.</p>
+        <p><b>Closed-loop execution.</b> After the grasp, FoundationPose tracks both objects continuously. At each step the policy predicts four future poses in the fixture frame and only the first is executed: PROXY computes the relative SE(3) transform from the current pose and maps it to the end effector through inverse kinematics, preferring the joint configuration closest to the current one. Re-planning at every step corrects accumulated errors and unexpected object motion. When the end-state classifier signals that the task is complete, the robot releases the object and returns to its home position.</p>
+      </div>
+      <figure class="vid">
+        <div class="plate">
+          <video id="closed-loop" controls playsinline muted preload="none" poster="media/closed-loop.poster.webp" width="960" height="540" aria-label="PROXY on the Franka Panda, Pour, with a tracking overlay: a green box follows the pitcher, a cyan box labelled GOAL shows the predicted goal pose, and text in the corner shows the progress score and the iteration count.">
+            <source src="media/closed-loop.v1.webm" type="video/webm">
+            <source src="media/closed-loop.v1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figcaption><button class="btn enlarge" type="button" data-enlarge="closed-loop" hidden>Enlarge</button><b>Closed loop on the Franka Panda (Pour).</b> The green box is the pitcher’s pose as FoundationPose tracks it. The cyan box labelled GOAL is the goal pose the policy predicts. “progress” is the end-state classifier’s completion score and “iter” counts policy steps; the goal box disappears when the policy stops.</figcaption>
+      </figure>
+    </div>
+    <p class="ui muted">Models and tools: Gemini 2.5 Flash, GroundedSAM, SAM3D and FoundationPose for the meshes; PyBullet and Blender for the scenes; Wan 2.2 and RIFE for the videos; GPT-5 for filtering; Video Depth Anything and FoundationPose for depth and pose; SPOT’s diffusion policy; Contact-GraspNet for grasps.</p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="sec" id="tasks">
+  <div class="sec-head">
+    <span class="num">02</span>
+    <h2>Tasks</h2>
+    <p>Four tabletop tasks, each with a held object and a fixture. The sentence for each task is the only task description PROXY gets.</p>
+  </div>
+  <figure class="bleed paperfig">
+    <div class="plate"><img src="img/tasks-1200.webp" srcset="img/tasks-1200.webp 1200w, img/tasks-2000.webp 2000w" sizes="(min-width: 72rem) 70rem, calc(100vw - 32px)" width="1200" height="240" loading="lazy" decoding="async" alt="Four photos of the Franka Panda’s table, one per task, each with its prompt underneath. A green pitcher and a white mug: Pour water into the mug. A yellow bowl and a blue bowl: Stack the yellow bowl inside the blue bowl. A blue hanger on a small stand and a white rack: Hook the hanger around the top crossbar of the white rack. A purple mug and a turquoise coffee machine: Place the mug under the coffee machine."></div>
+    <figcaption><button class="btn enlarge" type="button" data-enlarge="img:img/tasks-2000.webp" hidden>Enlarge</button><b>The four tasks</b> and the prompts used to generate their data, shown on the Franka Panda.</figcaption>
+  </figure>
+
+  <div class="bleed tasks" id="task-player">
+    <div class="chip-row" id="task-chips" role="group" aria-label="Task" hidden>
+      <button class="btn" type="button" aria-pressed="true" data-task="pour" data-name="Pour" data-prompt="Pour water into the mug" data-desc="picks up the pitcher and tilts it over the mug">Pour</button>
+      <button class="btn" type="button" aria-pressed="false" data-task="stack" data-name="Stack" data-prompt="Stack the yellow bowl inside the blue bowl" data-desc="picks up the yellow bowl and sets it inside the blue bowl">Stack</button>
+      <button class="btn" type="button" aria-pressed="false" data-task="hook" data-name="Hook" data-prompt="Hook the hanger around the top crossbar of the white rack" data-desc="picks up the hanger and hooks it on the rack">Hook</button>
+      <button class="btn" type="button" aria-pressed="false" data-task="place" data-name="Place" data-prompt="Place the mug under the coffee machine" data-desc="picks up the mug and sets it under the coffee machine">Place</button>
+    </div>
+    <div class="task-block">
+      <p class="prompt" id="task-prompt" aria-live="polite"><span class="task-name">Pour</span> “Pour water into the mug”</p>
+      <div class="loops">
+        <figure>
+          <div class="plate">
+            <video class="loop" id="task-panda" data-robot="panda" data-robot-name="Franka Panda" muted loop playsinline controls preload="none" poster="media/task-pour-panda.poster.webp" width="960" height="540" aria-label="PROXY on the Franka Panda: picks up the pitcher and tilts it over the mug">
+              <source src="media/task-pour-panda.v1.webm" type="video/webm">
+              <source src="media/task-pour-panda.v1.mp4" type="video/mp4">
+            </video>
+            <button class="btn media-ctrl" type="button" data-paused="false" aria-controls="task-panda" hidden><svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="lbl-pause">Pause</span><span class="lbl-play">Play</span><span class="visually-hidden"> Franka Panda clip</span></button>
+          </div>
+          <figcaption>Franka Panda</figcaption>
+        </figure>
+        <figure>
+          <div class="plate">
+            <video class="loop" id="task-ur5" data-robot="ur5" data-robot-name="UR5" muted loop playsinline controls preload="none" poster="media/task-pour-ur5.poster.webp" width="960" height="540" aria-label="PROXY on the UR5: picks up the pitcher and tilts it over the mug">
+              <source src="media/task-pour-ur5.v1.webm" type="video/webm">
+              <source src="media/task-pour-ur5.v1.mp4" type="video/mp4">
+            </video>
+            <button class="btn media-ctrl" type="button" data-paused="false" aria-controls="task-ur5" hidden><svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span class="lbl-pause">Pause</span><span class="lbl-play">Play</span><span class="visually-hidden"> UR5 clip</span></button>
+          </div>
+          <figcaption>UR5</figcaption>
+        </figure>
+      </div>
+    </div>
+    <noscript>
+      <div class="task-block">
+        <p class="prompt"><span class="task-name">Stack</span> “Stack the yellow bowl inside the blue bowl”</p>
+        <div class="loops">
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-stack-panda.poster.webp" width="960" height="540" aria-label="PROXY on the Franka Panda: picks up the yellow bowl and sets it inside the blue bowl"><source src="media/task-stack-panda.v1.webm" type="video/webm"><source src="media/task-stack-panda.v1.mp4" type="video/mp4"></video></div><figcaption>Franka Panda</figcaption></figure>
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-stack-ur5.poster.webp" width="960" height="540" aria-label="PROXY on the UR5: picks up the yellow bowl and sets it inside the blue bowl"><source src="media/task-stack-ur5.v1.webm" type="video/webm"><source src="media/task-stack-ur5.v1.mp4" type="video/mp4"></video></div><figcaption>UR5</figcaption></figure>
+        </div>
+      </div>
+      <div class="task-block">
+        <p class="prompt"><span class="task-name">Hook</span> “Hook the hanger around the top crossbar of the white rack”</p>
+        <div class="loops">
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-hook-panda.poster.webp" width="960" height="540" aria-label="PROXY on the Franka Panda: picks up the hanger and hooks it on the rack"><source src="media/task-hook-panda.v1.webm" type="video/webm"><source src="media/task-hook-panda.v1.mp4" type="video/mp4"></video></div><figcaption>Franka Panda</figcaption></figure>
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-hook-ur5.poster.webp" width="960" height="540" aria-label="PROXY on the UR5: picks up the hanger and hooks it on the rack"><source src="media/task-hook-ur5.v1.webm" type="video/webm"><source src="media/task-hook-ur5.v1.mp4" type="video/mp4"></video></div><figcaption>UR5</figcaption></figure>
+        </div>
+      </div>
+      <div class="task-block">
+        <p class="prompt"><span class="task-name">Place</span> “Place the mug under the coffee machine”</p>
+        <div class="loops">
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-place-panda.poster.webp" width="960" height="540" aria-label="PROXY on the Franka Panda: picks up the mug and sets it under the coffee machine"><source src="media/task-place-panda.v1.webm" type="video/webm"><source src="media/task-place-panda.v1.mp4" type="video/mp4"></video></div><figcaption>Franka Panda</figcaption></figure>
+          <figure><div class="plate"><video muted loop playsinline controls preload="none" poster="media/task-place-ur5.poster.webp" width="960" height="540" aria-label="PROXY on the UR5: picks up the mug and sets it under the coffee machine"><source src="media/task-place-ur5.v1.webm" type="video/webm"><source src="media/task-place-ur5.v1.mp4" type="video/mp4"></video></div><figcaption>UR5</figcaption></figure>
+        </div>
+      </div>
+    </noscript>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="sec" id="results">
+  <div class="sec-head">
+    <span class="num">03</span>
+    <h2>Results</h2>
+    <p>We compare PROXY with two baselines trained on real data, on all four tasks and both robots.</p>
+  </div>
+  <div class="wrap">
+    <h3 id="setup">Setup</h3>
+    <p>Two robots: a Franka Panda with a fin-ray gripper, and a UR5 with a Robotiq 2F-85 parallel-jaw gripper. A fixed ZED 2i stereo camera captures the scene for all methods; for PROXY it provides the one RGB-D image used to generate data, and for SPOT it records the human demonstration videos. Every method gets 10 trials per task on each robot, with objects placed within the same range seen during training (the initial distribution, <i>D</i><sub>0</sub>). A trial counts as a success when the held object reaches the goal configuration relative to the fixture.</p>
+    <details class="plain" open>
+      <summary>Baselines</summary>
+      <div class="two-col">
+        <p><b>SPOT</b> is an object-centric policy that, like PROXY, takes the current relative SE(3) pose between the held object and the fixture and predicts a trajectory of relative SE(3) poses. It is trained on 12 human-hand demonstrations per task, recorded on video under the same scene perturbation range PROXY uses.</p>
+        <p><b>Diffusion Policy</b> (DP) is an image-based visuomotor policy. It maps RGB images from the fixed scene camera and a wrist-mounted RealSense D435i, together with the end-effector pose, to a sequence of end-effector actions. It is trained on 30 teleoperated demonstrations per robot per task.</p>
+      </div>
+      <p class="ui muted">Both baselines use their official implementations. PROXY uses no real demonstrations: its 12 training demonstrations per task are generated from the single RGB-D image.</p>
+    </details>
+
+    <h3 id="success">Success rates</h3>
+    <ul class="kpis">
+      <li class="kpi kpi-ours">
+        <p class="lbl">PROXY</p>
+        <dl class="kv"><div><dt>Franka Panda</dt><dd class="val">0.875</dd></div><div><dt>UR5</dt><dd class="val">0.875</dd></div></dl>
+        <p class="data">0 real demonstrations</p>
+      </li>
+      <li class="kpi">
+        <p class="lbl">SPOT</p>
+        <dl class="kv"><div><dt>Franka Panda</dt><dd class="val">0.825</dd></div><div><dt>UR5</dt><dd class="val">0.725</dd></div></dl>
+        <p class="data">12 human-hand demonstrations per task</p>
+      </li>
+      <li class="kpi">
+        <p class="lbl">Diffusion Policy</p>
+        <dl class="kv"><div><dt>Franka Panda</dt><dd class="val">0.175</dd></div><div><dt>UR5</dt><dd class="val">0.425</dd></div></dl>
+        <p class="data">30 teleoperated demonstrations per robot per task</p>
+      </li>
+    </ul>
+    <p class="kpi-line">Mean success rate over the four tasks at <i>D</i><sub>0</sub> · 10 trials per method, task and robot</p>
+
+    <table class="results-table t1">
+      <caption>Success rate at <i>D</i><sub>0</sub>, 10 trials per cell. PROXY uses 12 generated and SPOT 12 human-hand demonstrations per task; Diffusion Policy uses 30 teleoperated demonstrations per robot per task. Bold marks the best value in each column, ties included.</caption>
+      <colgroup><col></colgroup>
+      <colgroup span="5"></colgroup>
+      <colgroup span="5"></colgroup>
+      <thead>
+        <tr><td></td><th colspan="5" scope="colgroup" class="g-start">Franka Panda</th><th colspan="5" scope="colgroup" class="g-start">UR5</th></tr>
+        <tr><th scope="col">Method</th><th scope="col" class="g-start">Pour</th><th scope="col">Stack</th><th scope="col">Hook</th><th scope="col">Place</th><th scope="col" class="mean">Mean</th><th scope="col" class="g-start">Pour</th><th scope="col">Stack</th><th scope="col">Hook</th><th scope="col">Place</th><th scope="col" class="mean">Mean</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Diffusion Policy</th><td class="g-start" data-label="Franka Panda · Pour">0.2</td><td data-label="Franka Panda · Stack">0.4</td><td data-label="Franka Panda · Hook">0</td><td data-label="Franka Panda · Place">0.1</td><td class="mean" data-label="Franka Panda · Mean">0.175</td><td class="g-start" data-label="UR5 · Pour">0.4</td><td data-label="UR5 · Stack">0.3</td><td data-label="UR5 · Hook">0.5</td><td data-label="UR5 · Place">0.5</td><td class="mean" data-label="UR5 · Mean">0.425</td></tr>
+        <tr><th scope="row">SPOT</th><td class="g-start" data-label="Franka Panda · Pour">0.8</td><td data-label="Franka Panda · Stack">0.9</td><td data-label="Franka Panda · Hook"><strong>0.7</strong></td><td data-label="Franka Panda · Place"><strong>0.9</strong></td><td class="mean" data-label="Franka Panda · Mean">0.825</td><td class="g-start" data-label="UR5 · Pour"><strong>0.7</strong></td><td data-label="UR5 · Stack">0.7</td><td data-label="UR5 · Hook">0.7</td><td data-label="UR5 · Place">0.8</td><td class="mean" data-label="UR5 · Mean">0.725</td></tr>
+        <tr class="ours"><th scope="row">PROXY</th><td class="g-start" data-label="Franka Panda · Pour"><strong>1.0</strong></td><td data-label="Franka Panda · Stack"><strong>1.0</strong></td><td data-label="Franka Panda · Hook">0.6</td><td data-label="Franka Panda · Place"><strong>0.9</strong></td><td class="mean" data-label="Franka Panda · Mean"><strong>0.875</strong></td><td class="g-start" data-label="UR5 · Pour"><strong>0.7</strong></td><td data-label="UR5 · Stack"><strong>1.0</strong></td><td data-label="UR5 · Hook"><strong>0.8</strong></td><td data-label="UR5 · Place"><strong>1.0</strong></td><td class="mean" data-label="UR5 · Mean"><strong>0.875</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p>PROXY has the highest mean success on both robots and matches or beats SPOT on 7 of the 8 task–robot pairs; the exception is Hook on the Panda (0.6 vs 0.7). Diffusion Policy is below both object-centric methods on every pair.</p>
+
+    <h3 id="failures">What goes wrong</h3>
+    <p>We record three kinds of failure: grasp failures, where the robot does not acquire the held object; manipulation failures, where it collides with the scene during execution; and goal failures, where the policy does not reach the desired end configuration.</p>
+    <p>Hook and Pour demand the most precise alignment: the hanger has to be guided onto the rack, and the pitcher’s spout has to point downward. Stack and Place are more forgiving. PROXY’s two lowest scores are on the two precise tasks: Hook on the Panda (0.6) and Pour on the UR5 (0.7). Diffusion Policy’s lower success reflects its need to learn grasping from scratch along with the task, made worse by its sensitivity to initial conditions. It does markedly better on the UR5 than on the Panda (mean 0.425 vs 0.175), because the stiffer UR5 gripper holds objects more stably than the compliant Panda gripper. The gap between PROXY and SPOT comes largely from demonstration quality: in SPOT’s human-hand videos the hand occludes the object and degrades pose tracking during training, while the generated videos contain no occlusion and give cleaner pose trajectories.</p>
+
+    <h3 id="side-by-side">Side by side</h3>
+    <p>Pick a robot and a task to watch one trial of each method.</p>
+  </div>
+
+  <div class="bleed cmp" id="cmp">
+    <div class="cmp-controls" hidden>
+      <div class="chip-row" id="cmp-robots" role="group" aria-label="Robot">
+        <button class="btn" type="button" aria-pressed="true" data-robot="panda">Franka Panda</button>
+        <button class="btn" type="button" aria-pressed="false" data-robot="ur5">UR5</button>
+      </div>
+      <div class="chip-row" id="cmp-tasks" role="group" aria-label="Task">
+        <button class="btn" type="button" aria-pressed="true" data-task="pour">Pour</button>
+        <button class="btn" type="button" aria-pressed="false" data-task="stack">Stack</button>
+        <button class="btn" type="button" aria-pressed="false" data-task="hook">Hook</button>
+        <button class="btn" type="button" aria-pressed="false" data-task="place">Place</button>
+      </div>
+      <button class="btn btn-play" type="button" id="cmp-play"><svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg><span id="cmp-play-lbl">Play all</span></button>
+    </div>
+    <p class="cmp-now" id="cmp-now" aria-live="polite">Franka Panda · Pour</p>
+    <div class="cmp-row">
+      <figure>
+        <figcaption class="who who-ours">PROXY</figcaption>
+        <div class="plate"><video id="cmp-proxy" data-method="proxy" data-method-name="PROXY" controls playsinline muted preload="none" poster="media/cmp-panda-pour-proxy.poster.webp" width="960" height="540" aria-label="PROXY, Franka Panda, Pour, trial 2"><source src="media/cmp-panda-pour-proxy.v1.webm" type="video/webm"><source src="media/cmp-panda-pour-proxy.v1.mp4" type="video/mp4"></video></div>
+      </figure>
+      <figure>
+        <figcaption class="who">SPOT</figcaption>
+        <div class="plate"><video id="cmp-spot" data-method="spot" data-method-name="SPOT" controls playsinline muted preload="none" poster="media/cmp-panda-pour-spot.poster.webp" width="960" height="540" aria-label="SPOT, Franka Panda, Pour, trial 2"><source src="media/cmp-panda-pour-spot.v1.webm" type="video/webm"><source src="media/cmp-panda-pour-spot.v1.mp4" type="video/mp4"></video></div>
+      </figure>
+      <figure>
+        <figcaption class="who">Diffusion Policy <span class="speed">4× speed</span></figcaption>
+        <div class="plate"><video id="cmp-dp" data-method="dp" data-method-name="Diffusion Policy" controls playsinline muted preload="none" poster="media/cmp-panda-pour-dp.poster.webp" width="960" height="540" aria-label="Diffusion Policy, Franka Panda, Pour, trial 2, shown at 4 times speed"><source src="media/cmp-panda-pour-dp.v1.webm" type="video/webm"><source src="media/cmp-panda-pour-dp.v1.mp4" type="video/mp4"></video></div>
+      </figure>
+    </div>
+    <p class="footnote">Trial 2 of 10 for every method, picked by number, not by outcome. Each method was reset separately, so the starting layouts differ between methods. Diffusion Policy clips are shown at 4× speed and PROXY and SPOT as recorded, so clip lengths are not comparable. The Franka Panda Pour clip for PROXY ends when its policy stops; the carry-back that follows, in which the robot drops the pitcher on its side, is cut. Some Diffusion Policy recordings also contain short bursts of torn frames from the original capture (most visible in Franka Panda Stack, Place and Pour).</p>
+    <noscript>
+      <table class="clip-table">
+        <caption>All comparison clips (MP4)</caption>
+        <thead><tr><th scope="col">Robot · task</th><th scope="col">PROXY</th><th scope="col">SPOT</th><th scope="col">Diffusion Policy (4×)</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Franka Panda · Pour</th><td><a href="media/cmp-panda-pour-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-panda-pour-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-panda-pour-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">Franka Panda · Stack</th><td><a href="media/cmp-panda-stack-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-panda-stack-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-panda-stack-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">Franka Panda · Hook</th><td><a href="media/cmp-panda-hook-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-panda-hook-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-panda-hook-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">Franka Panda · Place</th><td><a href="media/cmp-panda-place-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-panda-place-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-panda-place-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">UR5 · Pour</th><td><a href="media/cmp-ur5-pour-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-ur5-pour-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-ur5-pour-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">UR5 · Stack</th><td><a href="media/cmp-ur5-stack-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-ur5-stack-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-ur5-stack-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">UR5 · Hook</th><td><a href="media/cmp-ur5-hook-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-ur5-hook-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-ur5-hook-dp.v1.mp4">DP</a></td></tr>
+          <tr><th scope="row">UR5 · Place</th><td><a href="media/cmp-ur5-place-proxy.v1.mp4">PROXY</a></td><td><a href="media/cmp-ur5-place-spot.v1.mp4">SPOT</a></td><td><a href="media/cmp-ur5-place-dp.v1.mp4">DP</a></td></tr>
+        </tbody>
+      </table>
+    </noscript>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="sec" id="wider">
+  <div class="sec-head">
+    <span class="num">04</span>
+    <h2>Wider starting distribution</h2>
+    <p>So far every method started from <i>D</i><sub>0</sub>, the range of object placements it was trained on. Here we spread the objects out.</p>
+  </div>
+  <div class="wrap">
+    <div class="media-side media-side-fig">
+      <div>
+        <p>The wider distribution, <i>D</i><sub>1</sub>, places the objects over a larger area of the table with a wider range of rotations. Since PROXY’s scenes are synthetic, covering <i>D</i><sub>1</sub> only means generating training data over a wider range. <span class="method-name">PROXY<sup>+</sup></span> is PROXY trained on 24 generated demonstrations sampled from ±0.25 m in <i>x</i>, ±0.15 m in <i>y</i> and ±60° in rotation, at no additional human cost. These experiments use the Franka Panda, on Pour and Place.</p>
+      </div>
+      <figure class="paperfig fig-dist">
+        <div class="plate"><img src="img/scene-dist.webp" width="1066" height="658" loading="lazy" decoding="async" alt="Four photos of the Place task on the Franka Panda’s table. Left column, labelled initial distribution: the purple mug and the coffee machine at their usual spots. Right column, labelled wider distribution: the mug and the machine moved further apart or closer together, with the machine turned at a different angle."></div>
+        <figcaption><button class="btn enlarge" type="button" data-enlarge="img:img/scene-dist.webp" hidden>Enlarge</button><b>Starting layouts for Place on the Franka Panda.</b> Left: the initial distribution <i>D</i><sub>0</sub>, which matches training. Right: the wider distribution <i>D</i><sub>1</sub>.</figcaption>
+      </figure>
+    </div>
+
+    <table class="results-table t2">
+      <caption>Success rate on the Franka Panda, 10 trials per cell. The first three rows are the policies from the main results; PROXY<sup>+</sup> is trained on 24 generated demonstrations from the wider range, with no additional human cost. Bold marks the best value in each column, ties included.</caption>
+      <colgroup><col><col></colgroup>
+      <colgroup span="2"></colgroup>
+      <colgroup span="2"></colgroup>
+      <thead>
+        <tr><td></td><td></td><th colspan="2" scope="colgroup" class="g-start">Pour</th><th colspan="2" scope="colgroup" class="g-start">Place</th></tr>
+        <tr><th scope="col">Method</th><th scope="col" class="demos">Demonstrations</th><th scope="col" class="g-start"><i>D</i><sub>0</sub></th><th scope="col"><i>D</i><sub>1</sub></th><th scope="col" class="g-start"><i>D</i><sub>0</sub></th><th scope="col"><i>D</i><sub>1</sub></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Diffusion Policy</th><td class="demos" data-label="Demonstrations">30 teleoperated</td><td class="g-start" data-label="Pour · D₀">0.2</td><td data-label="Pour · D₁">0</td><td class="g-start" data-label="Place · D₀">0.1</td><td data-label="Place · D₁">0</td></tr>
+        <tr><th scope="row">SPOT</th><td class="demos" data-label="Demonstrations">12 human</td><td class="g-start" data-label="Pour · D₀">0.8</td><td data-label="Pour · D₁">0.4</td><td class="g-start" data-label="Place · D₀"><strong>0.9</strong></td><td data-label="Place · D₁">0.3</td></tr>
+        <tr class="ours"><th scope="row">PROXY</th><td class="demos" data-label="Demonstrations">12 generated</td><td class="g-start" data-label="Pour · D₀"><strong>1.0</strong></td><td data-label="Pour · D₁">0.5</td><td class="g-start" data-label="Place · D₀"><strong>0.9</strong></td><td data-label="Place · D₁">0.3</td></tr>
+        <tr class="ours"><th scope="row">PROXY<sup>+</sup></th><td class="demos" data-label="Demonstrations">24 generated</td><td class="g-start" data-label="Pour · D₀">0.9</td><td data-label="Pour · D₁"><strong>0.7</strong></td><td class="g-start" data-label="Place · D₀"><strong>0.9</strong></td><td data-label="Place · D₁"><strong>0.9</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p>At <i>D</i><sub>1</sub>, SPOT and PROXY both drop sharply. On Pour, SPOT falls from 0.8 to 0.4 and PROXY from 1.0 to 0.5, about half; on Place, both fall from 0.9 to 0.3, a third of their <i>D</i><sub>0</sub> rate. Diffusion Policy fails every <i>D</i><sub>1</sub> trial. PROXY<sup>+</sup> gets 0.7 on Pour and 0.9 on Place at <i>D</i><sub>1</sub>, just from generating its demonstrations over the wider range, with no extra human effort, and scores 0.9 at <i>D</i><sub>0</sub> on both tasks (PROXY: 1.0 on Pour, 0.9 on Place). SPOT and Diffusion Policy could only adapt by collecting new human or teleoperated demonstrations.</p>
+  </div>
+
+  <div class="bleed d1">
+    <figure class="vid d1-grid">
+      <div class="plate">
+        <video id="d1-pour" controls playsinline muted preload="none" poster="media/d1-pour.poster.webp" width="1280" height="720" aria-label="Pour on the Franka Panda at the wider distribution, four methods from the same starting layout in a two-by-two grid: top left PROXY plus, top right PROXY, bottom left SPOT, bottom right Diffusion Policy at 4 times speed.">
+          <source src="media/d1-pour.v1.webm" type="video/webm">
+          <source src="media/d1-pour.v1.mp4" type="video/mp4">
+        </video>
+        <div class="quads" aria-hidden="true"><span class="q q1">PROXY<sup>+</sup></span><span class="q q2">PROXY</span><span class="q q3">SPOT</span><span class="q q4">Diffusion Policy · 4×</span></div>
+      </div>
+      <figcaption><button class="btn enlarge" type="button" data-enlarge="d1-pour" hidden>Enlarge</button><b>Pour on the Franka Panda at <i>D</i><sub>1</sub>.</b> Trial 2 of each method, all from the same starting layout. Top left PROXY<sup>+</sup>, top right PROXY, bottom left SPOT, bottom right Diffusion Policy, shown at 4× speed. Each tile runs until its policy stops or the recording ends; after stopping, PROXY<sup>+</sup> lets go of the tilted pitcher, which falls beside the cup (not shown). The Diffusion Policy recording has short bursts of torn frames from the original capture.</figcaption>
+    </figure>
+    <figure class="vid d1-place">
+      <div class="plate">
+        <video id="d1-place" controls playsinline muted preload="none" poster="media/d1-place-proxyplus.poster.webp" width="960" height="540" aria-label="PROXY plus on the Franka Panda at the wider distribution. It carries the mug to a coffee machine that is moved and rotated relative to its usual placement and sets it on the drip tray under the spout; while retracting, the gripper bumps the machine and pushes it, with the mug still on the tray, toward the camera.">
+          <source src="media/d1-place-proxyplus.v1.webm" type="video/webm">
+          <source src="media/d1-place-proxyplus.v1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <figcaption><button class="btn enlarge" type="button" data-enlarge="d1-place" hidden>Enlarge</button><b>PROXY<sup>+</sup> on Place at <i>D</i><sub>1</sub>.</b> The coffee machine is moved and rotated relative to its <i>D</i><sub>0</sub> placement. The robot sets the mug on the drip tray under the spout; as the gripper retracts it bumps the machine and pushes it, with the mug still on the tray, toward the camera.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="sec" id="rollouts">
+  <div class="sec-head">
+    <span class="num">05</span>
+    <h2>More rollouts</h2>
+    <p>Sixteen more PROXY runs, two per task on each robot. Pick one to watch it.</p>
+    <p class="footnote">These are trials 6 and 7 of each task, picked by number, not by outcome. Most run to the end of the recording; the two Franka Panda Pour clips stop after the pour, before the robot carries the pitcher back and drops it on its side, and UR5 Hook trial 7 stops about a second early, before a bystander walks into view. Two UR5 tiles use a later trial instead of trial 7 (Pour: trial 10, Place: trial 8), because a bystander’s face is visible in the skipped trials.</p>
+  </div>
+  <div class="bleed">
+    <ul class="gallery" id="gallery">
+      <li><a class="tile" href="media/run-panda-pour-a.v1.mp4" data-clip="run-panda-pour-a"><span class="tile-img"><img src="media/run-panda-pour-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Pour <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-pour-b.v1.mp4" data-clip="run-panda-pour-b"><span class="tile-img"><img src="media/run-panda-pour-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Pour <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-stack-a.v1.mp4" data-clip="run-panda-stack-a"><span class="tile-img"><img src="media/run-panda-stack-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Stack <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-stack-b.v1.mp4" data-clip="run-panda-stack-b"><span class="tile-img"><img src="media/run-panda-stack-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Stack <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-hook-a.v1.mp4" data-clip="run-panda-hook-a"><span class="tile-img"><img src="media/run-panda-hook-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Hook <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-hook-b.v1.mp4" data-clip="run-panda-hook-b"><span class="tile-img"><img src="media/run-panda-hook-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Hook <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-place-a.v1.mp4" data-clip="run-panda-place-a"><span class="tile-img"><img src="media/run-panda-place-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Place <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-panda-place-b.v1.mp4" data-clip="run-panda-place-b"><span class="tile-img"><img src="media/run-panda-place-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">Franka Panda · Place <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-pour-a.v1.mp4" data-clip="run-ur5-pour-a"><span class="tile-img"><img src="media/run-ur5-pour-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Pour <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-pour-b.v1.mp4" data-clip="run-ur5-pour-b"><span class="tile-img"><img src="media/run-ur5-pour-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Pour <small>trial 10</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-stack-a.v1.mp4" data-clip="run-ur5-stack-a"><span class="tile-img"><img src="media/run-ur5-stack-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Stack <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-stack-b.v1.mp4" data-clip="run-ur5-stack-b"><span class="tile-img"><img src="media/run-ur5-stack-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Stack <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-hook-a.v1.mp4" data-clip="run-ur5-hook-a"><span class="tile-img"><img src="media/run-ur5-hook-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Hook <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-hook-b.v1.mp4" data-clip="run-ur5-hook-b"><span class="tile-img"><img src="media/run-ur5-hook-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Hook <small>trial 7</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-place-a.v1.mp4" data-clip="run-ur5-place-a"><span class="tile-img"><img src="media/run-ur5-place-a.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Place <small>trial 6</small></span></a></li>
+      <li><a class="tile" href="media/run-ur5-place-b.v1.mp4" data-clip="run-ur5-place-b"><span class="tile-img"><img src="media/run-ur5-place-b.poster.webp" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span><span class="tile-lbl">UR5 · Place <small>trial 8</small></span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="sec" id="limitations">
+  <div class="sec-head">
+    <span class="num">06</span>
+    <h2>Limitations</h2>
+  </div>
+  <div class="wrap">
+    <p>PROXY handles two-object tabletop tasks. Scenes with more objects, or settings that are not on a tabletop, would need a richer scene-diversification step.</p>
+    <p>The generated demonstrations can only be as good as the video generator. Tasks it cannot depict reliably, such as heavy occlusion, deformable objects or fast dynamics, remain hard.</p>
+    <p>The most natural next steps are multi-object scenes and generalizing across different object instances within a category.</p>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="sec" id="bibtex">
+  <div class="sec-head">
+    <span class="num">07</span>
+    <h2>BibTeX</h2>
+  </div>
+  <div class="wrap bib">
+<pre id="bib-text">@misc{yao2026proxy,
+  title  = {{PROXY}: Learning Object-Centric Manipulation Policies from a Single {RGB-D} Image},
+  author = {Yao, Maggie Huili and Chintalapudi, Sahit and Zhang, Tiffany and Anand, Akash and Tippur, Megha and Lozano-P{\'e}rez, Tom{\'a}s and Kaelbling, Leslie Pack and Agarwal, Aditya},
+  year   = {2026},
+  url    = {https://skymanaditya1.github.io/proxy-website/}
+}</pre>
+    <div class="copy-row">
+      <button class="btn" type="button" id="bib-copy" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy BibTeX</button>
+      <output id="bib-status" aria-live="polite"></output>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>We gratefully acknowledge support from NSF grant 2214177; from AFOSR grant FA9550-22-1-0249; from ONR MURI grants N00014-22-1-2740 and N00014-24-1-2603; from the MIT Siegel Family Quest for Intelligence; and from the Robotics and AI Institute.</p>
+    <p>MIT <a href="https://lis.csail.mit.edu/">Learning and Intelligent Systems</a> (LIS) Lab</p>
+    <p>One HTML file, one stylesheet, a few hundred lines of JavaScript. Site code MIT-licensed; paper, text, figures and videos © the authors; Newsreader under the SIL Open Font License.</p>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Enlarged media">
+  <div class="frame">
+    <div id="lightbox-body"></div>
+    <form method="dialog"><button class="btn btn-icon close" type="submit" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></form>
+  </div>
+</dialog>
+
+</body>
+</html>
