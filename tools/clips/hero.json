@@ -1,0 +1,10 @@
+{"clips": [
+ {"slug": "hero", "size": [1280, 720], "poster_t": 6.3, "hold": 1.5, "gop": 60,
+  "note": "Hero 2x2, mirrors the rows of paper Fig. 1; all PROXY, raw footage, D0, speed 1. TL Panda Hook hanger/ours/1_raw 0-8.0 s (hanger hooked ~6-7 s, hanging at end). TR Panda Stack bowls/ours/1_raw 0-10.7 s (bowl nested ~7.5-8.5 s, robot out of frame ~10.4 s). BL UR5 Place place/ours/3_raw 0.7-6.2 s (mug under the spout ~5.5 s, arm back home at end). BR UR5 Pour pour/ours/2_raw 0.75-9.83 s (pour over the teacup ~5.5-7.4 s, pitcher set back upright ~8.3 s), cropped to 1216x684 to drop the right edge where the back of a seated person's head shows from ~7.5 s. Poster at 6.3 s: hanger on the rack, bowl over the target bowl, mug placed, pitcher pouring.",
+  "grid": [
+   {"src": "panda_corl_videos/hanger/ours/1_raw.mp4", "ss": 0.0, "to": 8.0, "speed": 1},
+   {"src": "panda_corl_videos/bowls/ours/1_raw.mp4", "ss": 0.0, "to": 10.7, "speed": 1},
+   {"src": "ur5-corl-videos/place/ours/3_raw.mp4", "ss": 0.7, "to": null, "speed": 1},
+   {"src": "ur5-corl-videos/pour/ours/2_raw.mp4", "ss": 0.75, "to": null, "speed": 1, "crop": "1216:684:0:18"}
+  ]}
+]}

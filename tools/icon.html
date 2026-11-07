@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- Renders tools/favicon.svg for tools/build_icons.sh. Parameters in the hash:
+     s = mark size in px, bg = background (CSS colour, default transparent).
+     The canvas is the Chrome window, so pass --window-size to match. -->
+<meta charset="utf-8">
+<title>icon render</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; }
+  body { display: grid; place-items: center; }
+  img { display: block; }
+</style>
+<body>
+<img id="mark" src="favicon.svg" alt="">
+<script>
+  var p = new URLSearchParams(location.hash.slice(1));
+  var s = +p.get('s') || 32, img = document.getElementById('mark');
+  img.width = s; img.height = s;
+  if (p.get('bg')) document.body.style.background = p.get('bg');
+</script>
+</body>

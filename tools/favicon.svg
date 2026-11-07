@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- PROXY mark: the wireframe pose box tracked on each object. Visible edges in ink,
+       hidden edges thinner in muted, top face in the accent. Vertical edges sit on odd x
+       so they land on whole pixels at 16 and 32 px. Source of img/favicon.svg
+       (tools/build_icons.sh copies it and renders the PNG/ICO sizes from it). -->
+  <style>
+    .ink { stroke: #1a1a1a } .muted { stroke: #5c5a55 }
+    .acc { stroke: #0e6b6b } .face { fill: #0e6b6b; fill-opacity: .4 }
+    @media (prefers-color-scheme: dark) {
+      .ink { stroke: #e8e6e1 } .muted { stroke: #a5a29b }
+      .acc { stroke: #63c5bf } .face { fill: #63c5bf }
+    }
+  </style>
+  <g fill="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+    <g class="muted" stroke-width="1.2">
+      <polyline points="5,22.75 13,17.25 27,22.25"/>
+      <line x1="13" y1="4.25" x2="13" y2="17.25"/>
+    </g>
+    <polygon class="face" stroke="none" points="13,4.25 27,9.25 19,14.75 5,9.75"/>
+    <polyline class="ink" points="5,9.75 5,22.75 19,27.75 27,22.25 27,9.25"/>
+    <line class="ink" x1="19" y1="14.75" x2="19" y2="27.75"/>
+    <polygon class="acc" points="13,4.25 27,9.25 19,14.75 5,9.75"/>
+  </g>
+</svg>

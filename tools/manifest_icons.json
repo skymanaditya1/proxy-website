@@ -1,0 +1,41 @@
+{
+  "built_by": "tools/build_icons.sh",
+  "sources": [
+    "tools/favicon.svg",
+    "tools/icon.html",
+    "tools/og-card.html",
+    "fonts/newsreader-latin.woff2",
+    "fonts/newsreader-italic-latin.woff2",
+    "media/hero.poster.webp"
+  ],
+  "files": [
+    {
+      "path": "img/favicon.svg",
+      "bytes": 1274,
+      "width": 32,
+      "height": 32,
+      "note": "copy of tools/favicon.svg: wireframe pose box, visible edges ink, hidden edges muted, top face teal; viewBox 32; dark-mode colours via prefers-color-scheme"
+    },
+    {
+      "path": "img/favicon.ico",
+      "bytes": 1808,
+      "width": 32,
+      "height": 32,
+      "note": "32 px + 16 px frames rendered from favicon.svg by headless Chrome (tools/icon.html), transparent background, light-mode colours"
+    },
+    {
+      "path": "img/apple-touch-icon.png",
+      "bytes": 4322,
+      "width": 180,
+      "height": 180,
+      "note": "180x180, mark at 120 px on paper #fbfaf7 (tools/icon.html)"
+    },
+    {
+      "path": "img/og.png",
+      "bytes": 358076,
+      "width": 1200,
+      "height": 630,
+      "note": "1200x630 social card from tools/og-card.html: Newsreader title, italic subtitle, lab line, hero poster (four real PROXY runs) in a ruled plate; Chrome at 2x, lanczos to 1x; RGB"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{"clips": [
+ {"slug": "task-pour-panda", "src": "panda_corl_videos/pouring/ours/4_raw.mp4", "ss": 0.0, "to": 8.6, "speed": 1, "size": [960, 540], "poster_t": 6.5, "gop": 30,
+  "note": "Panda Pour, PROXY, raw (pouring/ours/4_raw) 0-8.6 s: grasp ~1-2.5 s, pitcher tilted over the teacup ~5.0-8.2 s; cut as the pitcher starts lifting away, before it is carried back (~9-12 s) and dropped on its side (~16 s)."},
+ {"slug": "task-pour-ur5", "src": "ur5-corl-videos/pour/ours/9_raw.mp4", "ss": 0.8, "to": null, "speed": 1, "crop": "1216:684:0:18", "size": [960, 540], "poster_t": 5.6, "gop": 30,
+  "note": "UR5 Pour, PROXY, raw (pour/ours/9_raw) 0.8-10.03 s: arm moves at 1.1 s, grasps, pitcher tilted over the teacup ~5.5-7.5 s, set back upright ~8.5 s, arm returns home by 10.0 s. Trial 9 is not clean at full frame: a seated person leans in at the right edge (head and shoulders from source ~6.1 s) and the side of their face (cheek, glasses rim) shows for 2 frames at source 6.23-6.27 s, x>=1245. So the clip is cropped to 1216x684 (x 0-1215, y 18-701), as in the hero and run-ur5-pour-a/b, which leaves only hair at the right edge (checked frame by frame, output 5.2-5.7 s). Trial 10 is the gallery's UR5 Pour tile; trial 4 shows a full face at the left (~7.6 s)."},
+ {"slug": "task-stack-panda", "src": "panda_corl_videos/bowls/ours/3_raw.mp4", "ss": 0.0, "to": 9.9, "speed": 1, "size": [960, 540], "poster_t": 7.5, "gop": 30,
+  "note": "Panda Stack, PROXY, raw (bowls/ours/3_raw) 0-9.9 s: grasp ~1-2.5 s, yellow bowl carried and nested in the blue bowl ~6.5-7.5 s, gripper leaves frame ~9.3 s."},
+ {"slug": "task-stack-ur5", "src": "ur5-corl-videos/bowls/ours/9_raw.mp4", "ss": 0.65, "to": null, "speed": 1, "size": [960, 540], "poster_t": 7.0, "gop": 30,
+  "note": "UR5 Stack, PROXY, raw (bowls/ours/9_raw) 0.65-9.8 s: arm moves at 1.0 s, yellow bowl grasped and lifted ~2-2.5 s, carried over the blue bowl and lowered into it ~7.0-7.5 s, nested ~7.5-8.5 s, gripper releases and the arm returns home by ~9.5 s; bowls nested at the end. Trial 9, like the other UR5 Tasks clips (Hook, Place, Pour); it replaces trial 7, which is the gallery's UR5 Stack trial 7 tile. Edge strips checked on every frame: only the robot arm enters at the right, no people."},
+ {"slug": "task-hook-panda", "src": "panda_corl_videos/hanger/ours/4_raw.mp4", "ss": 0.0, "to": null, "speed": 1, "size": [960, 540], "poster_t": 8.6, "gop": 30,
+  "note": "Panda Hook, PROXY, raw (hanger/ours/4_raw) 0-10.13 s: grasp ~1-2 s, hanger lifted and carried to the rack, hooked on the top bar ~8.5 s, gripper leaves ~9.3 s, hanger hanging at end."},
+ {"slug": "task-hook-ur5", "src": "ur5-corl-videos/hanger/ours/9_raw.mp4", "ss": 0.6, "to": null, "speed": 1, "size": [960, 540], "poster_t": 7.0, "gop": 30,
+  "note": "UR5 Hook, PROXY, raw (hanger/ours/9_raw) 0.6-9.03 s: arm moves at 0.9 s, hanger grasped ~2.5 s, carried to the rack and hooked ~7.5 s, arm returns home, hanger hanging at end."},
+ {"slug": "task-place-panda", "src": "panda_corl_videos/coffee/ours/coffee1_raw.mp4", "ss": 0.0, "to": 8.6, "speed": 1, "size": [960, 540], "poster_t": 6.8, "gop": 30,
+  "note": "Panda Place, PROXY, raw (coffee/ours/coffee1_raw) 0-8.6 s: mug grasped ~1.5-2.5 s, carried and set on the drip tray under the spout ~6.5-7.0 s, gripper leaves ~8.2 s."},
+ {"slug": "task-place-ur5", "src": "ur5-corl-videos/place/ours/9_raw.mp4", "ss": 0.7, "to": null, "speed": 1, "size": [960, 540], "poster_t": 5.6, "gop": 30,
+  "note": "UR5 Place, PROXY, raw (place/ours/9_raw) 0.7-6.93 s: arm moves at 1.0 s, mug grasped ~2.5-3 s, set on the drip tray under the spout ~5.5-6.0 s, gripper opens and lifts away."}
+]}

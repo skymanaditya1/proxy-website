@@ -1,0 +1,535 @@
+{
+ "spec": "tools/clips/gallery.json",
+ "clips": [
+  {
+   "slug": "run-panda-pour-a",
+   "note": "PROXY Panda Pour D0, trial 6 raw (source s): grasps pitcher 0.5-2.5, tilts it with the spout over the teacup 5.0-8.75, lifts it away 9.0; cut at 10.5 while it turns the pitcher upright (later carry-back and drop omitted).",
+   "poster_t": 7.0,
+   "files": [
+    {
+     "path": "media/run-panda-pour-a.v1.mp4",
+     "bytes": 628289,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 315,
+     "duration_s": 10.5
+    },
+    {
+     "path": "media/run-panda-pour-a.v1.webm",
+     "bytes": 454666,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 315,
+     "duration_s": 10.5
+    },
+    {
+     "path": "media/run-panda-pour-a.poster.webp",
+     "bytes": 14176
+    }
+   ],
+   "src": "panda_corl_videos/pouring/ours/6_raw.mp4",
+   "ss": 0.0,
+   "to": 10.5,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-pour-b",
+   "note": "PROXY Panda Pour D0, trial 7 raw (source s): grasps pitcher 0.5-2.5, tilts it with the spout over the teacup 5.5-10.75, lifts it away 11.0; cut at 12.5 while it turns the pitcher upright (later carry-back and drop omitted).",
+   "poster_t": 8.0,
+   "files": [
+    {
+     "path": "media/run-panda-pour-b.v1.mp4",
+     "bytes": 695259,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 375,
+     "duration_s": 12.5
+    },
+    {
+     "path": "media/run-panda-pour-b.v1.webm",
+     "bytes": 480528,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 375,
+     "duration_s": 12.5
+    },
+    {
+     "path": "media/run-panda-pour-b.poster.webp",
+     "bytes": 13732
+    }
+   ],
+   "src": "panda_corl_videos/pouring/ours/7_raw.mp4",
+   "ss": 0.0,
+   "to": 12.5,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-stack-a",
+   "note": "PROXY Panda Stack D0, trial 6 raw, whole file (10.1 s): grasps the yellow bowl 1.0-2.0, carries it over the blue bowl 4-6, nests it 6.5-7.0, releases and retracts; bowls nested at the end.",
+   "poster_t": 6.5,
+   "files": [
+    {
+     "path": "media/run-panda-stack-a.v1.mp4",
+     "bytes": 615263,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 304,
+     "duration_s": 10.134
+    },
+    {
+     "path": "media/run-panda-stack-a.v1.webm",
+     "bytes": 419210,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 304,
+     "duration_s": 10.133
+    },
+    {
+     "path": "media/run-panda-stack-a.poster.webp",
+     "bytes": 16318
+    }
+   ],
+   "src": "panda_corl_videos/bowls/ours/6_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-stack-b",
+   "note": "PROXY Panda Stack D0, trial 7 raw, whole file (11.9 s): grasps the yellow bowl 1.0-2.5, carries it over the blue bowl 5-7.5, nests it 8.0-8.5, releases and retracts; yellow bowl sits slightly tilted inside the blue bowl at the end.",
+   "poster_t": 7.75,
+   "files": [
+    {
+     "path": "media/run-panda-stack-b.v1.mp4",
+     "bytes": 681124,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 358,
+     "duration_s": 11.934
+    },
+    {
+     "path": "media/run-panda-stack-b.v1.webm",
+     "bytes": 458075,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 358,
+     "duration_s": 11.933
+    },
+    {
+     "path": "media/run-panda-stack-b.poster.webp",
+     "bytes": 15650
+    }
+   ],
+   "src": "panda_corl_videos/bowls/ours/7_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-hook-a",
+   "note": "PROXY Panda Hook, trial 6 raw, whole file (9.6 s): grasps the hanger 1.0-2.0, lifts it 3-5, hooks it on the rack bar 6.0-7.0, releases and retracts; hanger hangs on the rack at the end.",
+   "poster_t": 6.5,
+   "files": [
+    {
+     "path": "media/run-panda-hook-a.v1.mp4",
+     "bytes": 655820,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 287,
+     "duration_s": 9.567
+    },
+    {
+     "path": "media/run-panda-hook-a.v1.webm",
+     "bytes": 509280,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 287,
+     "duration_s": 9.566
+    },
+    {
+     "path": "media/run-panda-hook-a.poster.webp",
+     "bytes": 15376
+    }
+   ],
+   "src": "panda_corl_videos/hanger/ours/6_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-hook-b",
+   "note": "PROXY Panda Hook, trial 7 raw, whole file (10.0 s): grasps the hanger 1.0-2.0, lifts it 3-5, hooks it on the rack bar 6.5-7.5, releases and retracts; hanger hangs on the rack at the end.",
+   "poster_t": 6.5,
+   "files": [
+    {
+     "path": "media/run-panda-hook-b.v1.mp4",
+     "bytes": 670403,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 300,
+     "duration_s": 10.0
+    },
+    {
+     "path": "media/run-panda-hook-b.v1.webm",
+     "bytes": 514555,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 300,
+     "duration_s": 10.0
+    },
+    {
+     "path": "media/run-panda-hook-b.poster.webp",
+     "bytes": 15524
+    }
+   ],
+   "src": "panda_corl_videos/hanger/ours/7_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-place-a",
+   "note": "PROXY Panda Place D0, trial coffee6 raw, whole file (8.4 s): grasps the mug 1.5-2.0, carries it to the coffee machine 2.5-5, sets it on the drip tray 5.5-6.5, retracts; mug under the spout at the end.",
+   "poster_t": 5.0,
+   "files": [
+    {
+     "path": "media/run-panda-place-a.v1.mp4",
+     "bytes": 535249,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 253,
+     "duration_s": 8.434
+    },
+    {
+     "path": "media/run-panda-place-a.v1.webm",
+     "bytes": 348979,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 253,
+     "duration_s": 8.433
+    },
+    {
+     "path": "media/run-panda-place-a.poster.webp",
+     "bytes": 14982
+    }
+   ],
+   "src": "panda_corl_videos/coffee/ours/coffee6_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-panda-place-b",
+   "note": "PROXY Panda Place D0, trial coffee7 raw, whole file (8.9 s): grasps the mug 1.5-2.5, carries it to the coffee machine 3-5.5, sets it on the drip tray 6.0-7.0, retracts; mug under the spout at the end.",
+   "poster_t": 5.5,
+   "files": [
+    {
+     "path": "media/run-panda-place-b.v1.mp4",
+     "bytes": 563312,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 266,
+     "duration_s": 8.867
+    },
+    {
+     "path": "media/run-panda-place-b.v1.webm",
+     "bytes": 388428,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 266,
+     "duration_s": 8.866
+    },
+    {
+     "path": "media/run-panda-place-b.poster.webp",
+     "bytes": 15172
+    }
+   ],
+   "src": "panda_corl_videos/coffee/ours/coffee7_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-pour-a",
+   "note": "PROXY UR5 Pour D0, trial 6 raw (source s): 0.75 s idle trimmed (motion starts 1.07); grasps pitcher 2.5-3.5, brings it tilted next to the teacup 5.0-6.5 (partly hidden by the wrist), lifts it away 6.5-8.5, puts it back upright 9-10.5; outcome unclear. Cropped to 1216x684 (as in the hero) to drop the right edge, where hair and a shoulder of a seated person show (no face).",
+   "poster_t": 4.5,
+   "files": [
+    {
+     "path": "media/run-ur5-pour-a.v1.mp4",
+     "bytes": 835423,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 304,
+     "duration_s": 10.134
+    },
+    {
+     "path": "media/run-ur5-pour-a.v1.webm",
+     "bytes": 703718,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 304,
+     "duration_s": 10.133
+    },
+    {
+     "path": "media/run-ur5-pour-a.poster.webp",
+     "bytes": 34326
+    }
+   ],
+   "src": "ur5-corl-videos/pour/ours/6_raw.mp4",
+   "ss": 0.75,
+   "to": null,
+   "speed": 1,
+   "crop": "1216:684:0:18"
+  },
+  {
+   "slug": "run-ur5-pour-b",
+   "note": "PROXY UR5 Pour D0, trial 10 raw (substitute for trial 7; trials 7, 8, 9 show a face): 0.75 s idle trimmed (motion 1.07); grasps pitcher 2.5-3.5, holds it tilted over the teacup 5.0-7.5, lifts it 8.0, puts it back upright 8.5-9.5, retracts. Cropped to 1216x684 (as in the hero) to drop the right edge, where the back of a seated person's head shows 7.6-8.4 (no face).",
+   "poster_t": 5.5,
+   "files": [
+    {
+     "path": "media/run-ur5-pour-b.v1.mp4",
+     "bytes": 745300,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 282,
+     "duration_s": 9.4
+    },
+    {
+     "path": "media/run-ur5-pour-b.v1.webm",
+     "bytes": 644271,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 282,
+     "duration_s": 9.4
+    },
+    {
+     "path": "media/run-ur5-pour-b.poster.webp",
+     "bytes": 32516
+    }
+   ],
+   "src": "ur5-corl-videos/pour/ours/10_raw.mp4",
+   "ss": 0.75,
+   "to": null,
+   "speed": 1,
+   "crop": "1216:684:0:18"
+  },
+  {
+   "slug": "run-ur5-stack-a",
+   "note": "PROXY UR5 Stack D0, trial 6 raw (source s): 0.65 s idle trimmed (motion 0.97); grasps the yellow bowl 2.5-3.5, carries it 4-6.5, nests it in the blue bowl 7.0, releases and retracts 8-8.9; bowls nested at the end.",
+   "poster_t": 6.0,
+   "files": [
+    {
+     "path": "media/run-ur5-stack-a.v1.mp4",
+     "bytes": 675569,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 247,
+     "duration_s": 8.234
+    },
+    {
+     "path": "media/run-ur5-stack-a.v1.webm",
+     "bytes": 576755,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 247,
+     "duration_s": 8.233
+    },
+    {
+     "path": "media/run-ur5-stack-a.poster.webp",
+     "bytes": 34580
+    }
+   ],
+   "src": "ur5-corl-videos/bowls/ours/6_raw.mp4",
+   "ss": 0.65,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-stack-b",
+   "note": "PROXY UR5 Stack D0, trial 7 raw (source s): 0.65 s idle trimmed (motion 0.97); grasps the yellow bowl 2.5-3.5, carries it 4-6.5, nests it in the blue bowl 7.0-7.5, releases and retracts 8.5-9.3; bowls nested at the end.",
+   "poster_t": 6.4,
+   "files": [
+    {
+     "path": "media/run-ur5-stack-b.v1.mp4",
+     "bytes": 722898,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 258,
+     "duration_s": 8.6
+    },
+    {
+     "path": "media/run-ur5-stack-b.v1.webm",
+     "bytes": 602132,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 258,
+     "duration_s": 8.6
+    },
+    {
+     "path": "media/run-ur5-stack-b.poster.webp",
+     "bytes": 35046
+    }
+   ],
+   "src": "ur5-corl-videos/bowls/ours/7_raw.mp4",
+   "ss": 0.65,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-hook-a",
+   "note": "PROXY UR5 Hook, trial 6 raw (source s): 0.65 s idle trimmed (motion 0.97); grasps the hanger 3.0-3.5, lifts it 4-6, carries it to the rack 7-9.5, releases 10.0, retracts; hanger hangs on the rack at the end (12.0).",
+   "poster_t": 8.3,
+   "files": [
+    {
+     "path": "media/run-ur5-hook-a.v1.mp4",
+     "bytes": 976397,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 339,
+     "duration_s": 11.3
+    },
+    {
+     "path": "media/run-ur5-hook-a.v1.webm",
+     "bytes": 836328,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 339,
+     "duration_s": 11.3
+    },
+    {
+     "path": "media/run-ur5-hook-a.poster.webp",
+     "bytes": 37202
+    }
+   ],
+   "src": "ur5-corl-videos/hanger/ours/6_raw.mp4",
+   "ss": 0.65,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-hook-b",
+   "note": "PROXY UR5 Hook, trial 7 raw (source s): 0.65 s idle trimmed (motion 0.97); grasps the hanger 3.0, lifts it 4-6, hooks it on the rack 8.5-9.0, hanger hanging while the arm rises; cut at 9.65 because a person walks in at the left from 9.73.",
+   "poster_t": 7.8,
+   "files": [
+    {
+     "path": "media/run-ur5-hook-b.v1.mp4",
+     "bytes": 761467,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 270,
+     "duration_s": 9.0
+    },
+    {
+     "path": "media/run-ur5-hook-b.v1.webm",
+     "bytes": 650840,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 270,
+     "duration_s": 9.0
+    },
+    {
+     "path": "media/run-ur5-hook-b.poster.webp",
+     "bytes": 36798
+    }
+   ],
+   "src": "ur5-corl-videos/hanger/ours/7_raw.mp4",
+   "ss": 0.65,
+   "to": 9.65,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-place-a",
+   "note": "PROXY UR5 Place D0, trial 6 raw (source s): 0.7 s idle trimmed (motion 1.0); grasps the mug 2.5, carries it to the coffee machine 3-6, sets it on the drip tray 6.0-6.5, retracts by 7.5; mug under the spout at the end.",
+   "poster_t": 4.8,
+   "files": [
+    {
+     "path": "media/run-ur5-place-a.v1.mp4",
+     "bytes": 556321,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 204,
+     "duration_s": 6.8
+    },
+    {
+     "path": "media/run-ur5-place-a.v1.webm",
+     "bytes": 449784,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 204,
+     "duration_s": 6.8
+    },
+    {
+     "path": "media/run-ur5-place-a.poster.webp",
+     "bytes": 33284
+    }
+   ],
+   "src": "ur5-corl-videos/place/ours/6_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "run-ur5-place-b",
+   "note": "PROXY UR5 Place D0, trial 8 raw (substitute for trial 7, which shows a person's face at the right edge ~2.2 s): 0.7 s idle trimmed (motion 1.0); grasps the mug 2.5, carries it 3-6, sets it on the drip tray 6.0-6.5, retracts by 7.5.",
+   "poster_t": 4.8,
+   "files": [
+    {
+     "path": "media/run-ur5-place-b.v1.mp4",
+     "bytes": 574484,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 205,
+     "duration_s": 6.834
+    },
+    {
+     "path": "media/run-ur5-place-b.v1.webm",
+     "bytes": 461951,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 205,
+     "duration_s": 6.833
+    },
+    {
+     "path": "media/run-ur5-place-b.poster.webp",
+     "bytes": 35376
+    }
+   ],
+   "src": "ur5-corl-videos/place/ours/8_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  }
+ ]
+}

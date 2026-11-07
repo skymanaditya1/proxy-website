@@ -1,0 +1,797 @@
+{
+ "spec": "tools/clips/compare.json",
+ "clips": [
+  {
+   "slug": "cmp-panda-pour-proxy",
+   "note": "PROXY, Panda Pour D0, trial 2 (pouring/ours/2_raw.mp4), src 0-9.0 s at 1x: arm enters at once, grasps the pitcher ~1.5-2 s, tilts it with the spout over the teacup ~4.5-8.0 s (overlay progress freezes at 0.915, iter 9, ~8 s), clip ends at 9.0 s as the pitcher is being withdrawn; the carry-back and drop of the pitcher (src 9-15.9 s) is cut.",
+   "poster_t": 4.05,
+   "files": [
+    {
+     "path": "media/cmp-panda-pour-proxy.v1.mp4",
+     "bytes": 574485,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 270,
+     "duration_s": 9.0
+    },
+    {
+     "path": "media/cmp-panda-pour-proxy.v1.webm",
+     "bytes": 416351,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 270,
+     "duration_s": 9.0
+    },
+    {
+     "path": "media/cmp-panda-pour-proxy.poster.webp",
+     "bytes": 13230
+    }
+   ],
+   "src": "panda_corl_videos/pouring/ours/2_raw.mp4",
+   "ss": 0.0,
+   "to": 9.0,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-pour-spot",
+   "note": "SPOT, Panda Pour D0, trial 2 (pouring/spot/2_raw.mp4), whole recording 0-11.13 s at 1x: grasps the pitcher ~1.5 s, holds it left of the teacup 3-8 s, swings it over to the cup and tilts it level with its top just behind the cup rim from ~8.5 s; recording ends at 11.1 s still tilted (overlay progress 0.973 at iter 6 from ~10 s).",
+   "poster_t": 5.01,
+   "files": [
+    {
+     "path": "media/cmp-panda-pour-spot.v1.mp4",
+     "bytes": 577221,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 334,
+     "duration_s": 11.134
+    },
+    {
+     "path": "media/cmp-panda-pour-spot.v1.webm",
+     "bytes": 338405,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 334,
+     "duration_s": 11.133
+    },
+    {
+     "path": "media/cmp-panda-pour-spot.poster.webp",
+     "bytes": 15324
+    }
+   ],
+   "src": "panda_corl_videos/pouring/spot/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-pour-dp",
+   "note": "Diffusion Policy, Panda Pour D0, trial 2 (pouring/dp_pouring_vids/2.mp4, scene camera), src 3.5-63.0 s at 4x: idle until ~4.7 s, gripper hovers beside the pitcher 6-38 s, grasps and lifts it ~39-41 s, then holds it tilted base-down against the teacup 44-63 s until the recording ends; short tearing bursts at src 16-19 s and 44.5-48.5 s.",
+   "poster_t": 6.69,
+   "files": [
+    {
+     "path": "media/cmp-panda-pour-dp.v1.mp4",
+     "bytes": 527711,
+     "codec": "h264",
+     "width": 640,
+     "height": 360,
+     "frames": 446,
+     "duration_s": 14.867
+    },
+    {
+     "path": "media/cmp-panda-pour-dp.v1.webm",
+     "bytes": 315718,
+     "codec": "vp9",
+     "width": 640,
+     "height": 360,
+     "frames": 446,
+     "duration_s": 14.866
+    },
+    {
+     "path": "media/cmp-panda-pour-dp.poster.webp",
+     "bytes": 7064
+    }
+   ],
+   "src": "panda_corl_videos/pouring/dp_pouring_vids/2.mp4",
+   "ss": 3.5,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-panda-stack-proxy",
+   "note": "PROXY, Panda Stack D0, trial 2 (bowls/ours/2_raw.mp4), whole recording 0-10.87 s at 1x: grasps the yellow bowl ~1.5 s, carries it over the blue bowl ~5-6 s, sets it nested inside ~7-7.5 s, retracts; ends with the bowls nested.",
+   "poster_t": 4.89,
+   "files": [
+    {
+     "path": "media/cmp-panda-stack-proxy.v1.mp4",
+     "bytes": 660169,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 326,
+     "duration_s": 10.867
+    },
+    {
+     "path": "media/cmp-panda-stack-proxy.v1.webm",
+     "bytes": 426163,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 326,
+     "duration_s": 10.866
+    },
+    {
+     "path": "media/cmp-panda-stack-proxy.poster.webp",
+     "bytes": 12888
+    }
+   ],
+   "src": "panda_corl_videos/bowls/ours/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-stack-spot",
+   "note": "SPOT, Panda Stack D0, trial 2 (bowls/spot/2_raw.mp4), whole recording 0-13.0 s at 1x: grasps the yellow bowl ~1.5 s, lowers it onto the blue bowl ~7-9 s, the blue bowl tips onto its side ~9.5-10 s and the yellow bowl is set down beside it; ends with the bowls apart.",
+   "poster_t": 5.85,
+   "files": [
+    {
+     "path": "media/cmp-panda-stack-spot.v1.mp4",
+     "bytes": 767932,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 390,
+     "duration_s": 13.0
+    },
+    {
+     "path": "media/cmp-panda-stack-spot.v1.webm",
+     "bytes": 516734,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 390,
+     "duration_s": 13.0
+    },
+    {
+     "path": "media/cmp-panda-stack-spot.poster.webp",
+     "bytes": 14736
+    }
+   ],
+   "src": "panda_corl_videos/bowls/spot/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-stack-dp",
+   "note": "Diffusion Policy, Panda Stack D0, trial 2 (bowls/dp_bowls_vids/2.mp4, scene camera, 1280x720 source), src 3.0-30.4 s (ends on a clean frame; the last 0.7 s include torn frames) at 4x: arm idle until ~5 s, grasps the yellow bowl ~8-14 s, carries it over the blue bowl and nests it by ~28 s; the recording has several torn frames (shifted slices) from the original capture, e.g. near src 6, 16, 22 and 26 s. Kept despite the tearing so every comparison cell is trial 2.",
+   "poster_t": 2.6,
+   "files": [
+    {
+     "path": "media/cmp-panda-stack-dp.v1.mp4",
+     "bytes": 412580,
+     "codec": "h264",
+     "width": 640,
+     "height": 360,
+     "frames": 206,
+     "duration_s": 6.867
+    },
+    {
+     "path": "media/cmp-panda-stack-dp.v1.webm",
+     "bytes": 314954,
+     "codec": "vp9",
+     "width": 640,
+     "height": 360,
+     "frames": 206,
+     "duration_s": 6.866
+    },
+    {
+     "path": "media/cmp-panda-stack-dp.poster.webp",
+     "bytes": 8654
+    }
+   ],
+   "src": "panda_corl_videos/bowls/dp_bowls_vids/2.mp4",
+   "ss": 3.0,
+   "to": 30.4,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-panda-hook-proxy",
+   "note": "PROXY, Panda Hook D0, trial 2 (hanger/ours/2_raw.mp4), whole recording 0-9.53 s at 1x: grasps the hanger ~1.5-2 s, lifts and carries it to the rack 3-6 s, the hanger drops onto the rack base ~6.5-7 s instead of hooking on the bar, robot retracts; ends with the hanger lying on the rack base.",
+   "poster_t": 4.29,
+   "files": [
+    {
+     "path": "media/cmp-panda-hook-proxy.v1.mp4",
+     "bytes": 652689,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 286,
+     "duration_s": 9.534
+    },
+    {
+     "path": "media/cmp-panda-hook-proxy.v1.webm",
+     "bytes": 474924,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 286,
+     "duration_s": 9.533
+    },
+    {
+     "path": "media/cmp-panda-hook-proxy.poster.webp",
+     "bytes": 16738
+    }
+   ],
+   "src": "panda_corl_videos/hanger/ours/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-hook-spot",
+   "note": "SPOT, Panda Hook D0, trial 2 (hanger/spot/2_raw.mp4), whole recording 0-11.67 s at 1x: grasps the hanger ~1.5 s, carries it to the rack 3-8 s, lowers it onto the rack and releases ~9-10 s, retracts; ends with the hanger leaning on the rack, hook at the top bar.",
+   "poster_t": 5.25,
+   "files": [
+    {
+     "path": "media/cmp-panda-hook-spot.v1.mp4",
+     "bytes": 909991,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 350,
+     "duration_s": 11.667
+    },
+    {
+     "path": "media/cmp-panda-hook-spot.v1.webm",
+     "bytes": 705026,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 350,
+     "duration_s": 11.666
+    },
+    {
+     "path": "media/cmp-panda-hook-spot.poster.webp",
+     "bytes": 19468
+    }
+   ],
+   "src": "panda_corl_videos/hanger/spot/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-hook-dp",
+   "note": "Diffusion Policy, Panda Hook D0, trial 2 (hanger/dp_hanger_vids/2.mp4, scene camera), src 0.9-16.53 s at 4x: idle until ~2.1 s, gripper descends near the hanger's hook 4-16.5 s without grasping it; recording ends with the hanger untouched on the table.",
+   "poster_t": 1.76,
+   "files": [
+    {
+     "path": "media/cmp-panda-hook-dp.v1.mp4",
+     "bytes": 169314,
+     "codec": "h264",
+     "width": 640,
+     "height": 360,
+     "frames": 117,
+     "duration_s": 3.9
+    },
+    {
+     "path": "media/cmp-panda-hook-dp.v1.webm",
+     "bytes": 115227,
+     "codec": "vp9",
+     "width": 640,
+     "height": 360,
+     "frames": 117,
+     "duration_s": 3.9
+    },
+    {
+     "path": "media/cmp-panda-hook-dp.poster.webp",
+     "bytes": 12238
+    }
+   ],
+   "src": "panda_corl_videos/hanger/dp_hanger_vids/2.mp4",
+   "ss": 0.9,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-panda-place-proxy",
+   "note": "PROXY, Panda Place D0, trial 2 (coffee/ours/coffee2_raw.mp4), whole recording 0-8.2 s at 1x: grasps the mug ~1.5-2 s, carries it to the coffee machine, sets it on the drip tray under the spout ~5.5-6.5 s, retracts; ends with the mug under the spout.",
+   "poster_t": 3.69,
+   "files": [
+    {
+     "path": "media/cmp-panda-place-proxy.v1.mp4",
+     "bytes": 515165,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 246,
+     "duration_s": 8.2
+    },
+    {
+     "path": "media/cmp-panda-place-proxy.v1.webm",
+     "bytes": 362492,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 246,
+     "duration_s": 8.2
+    },
+    {
+     "path": "media/cmp-panda-place-proxy.poster.webp",
+     "bytes": 16674
+    }
+   ],
+   "src": "panda_corl_videos/coffee/ours/coffee2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-place-spot",
+   "note": "SPOT, Panda Place D0, trial 2 (coffee/spot/2_raw.mp4), whole recording 0-9.1 s at 1x: grasps the mug ~2 s, carries it to the machine, sets it on the drip tray under the spout ~6.5-7 s, retracts; ends with the mug under the spout.",
+   "poster_t": 4.09,
+   "files": [
+    {
+     "path": "media/cmp-panda-place-spot.v1.mp4",
+     "bytes": 567616,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 273,
+     "duration_s": 9.1
+    },
+    {
+     "path": "media/cmp-panda-place-spot.v1.webm",
+     "bytes": 354192,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 273,
+     "duration_s": 9.1
+    },
+    {
+     "path": "media/cmp-panda-place-spot.poster.webp",
+     "bytes": 17084
+    }
+   ],
+   "src": "panda_corl_videos/coffee/spot/2_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-panda-place-dp",
+   "note": "Diffusion Policy, Panda Place D0, trial 2 (coffee/dp_coffee_vids/2.mp4, scene camera), src 6.7-32.6 s at 4x: idle until ~7.9 s, gripper reaches the mug ~12 s and works at it 12-32.6 s, pushing it about but never carrying it to the machine; tearing burst at src 21.3-26.1 s.",
+   "poster_t": 2.91,
+   "files": [
+    {
+     "path": "media/cmp-panda-place-dp.v1.mp4",
+     "bytes": 322021,
+     "codec": "h264",
+     "width": 640,
+     "height": 360,
+     "frames": 194,
+     "duration_s": 6.467
+    },
+    {
+     "path": "media/cmp-panda-place-dp.v1.webm",
+     "bytes": 242514,
+     "codec": "vp9",
+     "width": 640,
+     "height": 360,
+     "frames": 194,
+     "duration_s": 6.466
+    },
+    {
+     "path": "media/cmp-panda-place-dp.poster.webp",
+     "bytes": 11772
+    }
+   ],
+   "src": "panda_corl_videos/coffee/dp_coffee_vids/2.mp4",
+   "ss": 6.7,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-ur5-pour-proxy",
+   "note": "PROXY, UR5 Pour D0, trial 2 (pour/ours/2_raw.mp4), src 0.8-9.83 s at 1x: arm still until ~1.1 s, grasps the pitcher ~3-4 s, tilts it over the teacup ~6-7 s (overlay progress 0.965, iter 8), puts it back upright on the table ~8-9 s and retracts.",
+   "poster_t": 4.07,
+   "files": [
+    {
+     "path": "media/cmp-ur5-pour-proxy.v1.mp4",
+     "bytes": 867740,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 271,
+     "duration_s": 9.034
+    },
+    {
+     "path": "media/cmp-ur5-pour-proxy.v1.webm",
+     "bytes": 738513,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 271,
+     "duration_s": 9.033
+    },
+    {
+     "path": "media/cmp-ur5-pour-proxy.poster.webp",
+     "bytes": 32740
+    }
+   ],
+   "src": "ur5-corl-videos/pour/ours/2_raw.mp4",
+   "ss": 0.8,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-pour-spot",
+   "note": "SPOT, UR5 Pour D0, trial 2 (pour/spot/2_raw.mp4), src 0.85-6.3 s at 1x: arm still until ~1.15 s, grasps the pitcher ~3-3.5 s, tilts it beside (left of) the teacup ~4-6.3 s; recording ends at the policy timeout (overlay iter 34, progress 0.062).",
+   "poster_t": 2.45,
+   "files": [
+    {
+     "path": "media/cmp-ur5-pour-spot.v1.mp4",
+     "bytes": 428595,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 163,
+     "duration_s": 5.434
+    },
+    {
+     "path": "media/cmp-ur5-pour-spot.v1.webm",
+     "bytes": 333316,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 163,
+     "duration_s": 5.433
+    },
+    {
+     "path": "media/cmp-ur5-pour-spot.poster.webp",
+     "bytes": 30254
+    }
+   ],
+   "src": "ur5-corl-videos/pour/spot/2_raw.mp4",
+   "ss": 0.85,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-pour-dp",
+   "note": "Diffusion Policy, UR5 Pour D0, trial 2 (pour/diffusion/2.mp4, scene camera), whole recording 0-59.47 s at 4x: arm moves from ~0.6 s, hovers above the pitcher 3-19 s, knocks it over ~20 s, then moves around above the table until the recording ends.",
+   "poster_t": 6.69,
+   "files": [
+    {
+     "path": "media/cmp-ur5-pour-dp.v1.mp4",
+     "bytes": 1120810,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 446,
+     "duration_s": 14.867
+    },
+    {
+     "path": "media/cmp-ur5-pour-dp.v1.webm",
+     "bytes": 1044307,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 446,
+     "duration_s": 14.866
+    },
+    {
+     "path": "media/cmp-ur5-pour-dp.poster.webp",
+     "bytes": 33168
+    }
+   ],
+   "src": "ur5-corl-videos/pour/diffusion/2.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-ur5-stack-proxy",
+   "note": "PROXY, UR5 Stack D0, trial 2 (bowls/ours/2_raw.mp4), src 0.7-9.27 s at 1x: arm still until ~1.0 s, grasps the yellow bowl ~2.5-3 s, carries it over the blue bowl, sets it nested ~7-7.5 s, retracts; ends with the bowls nested.",
+   "poster_t": 3.86,
+   "files": [
+    {
+     "path": "media/cmp-ur5-stack-proxy.v1.mp4",
+     "bytes": 723483,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 257,
+     "duration_s": 8.567
+    },
+    {
+     "path": "media/cmp-ur5-stack-proxy.v1.webm",
+     "bytes": 597188,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 257,
+     "duration_s": 8.566
+    },
+    {
+     "path": "media/cmp-ur5-stack-proxy.poster.webp",
+     "bytes": 33566
+    }
+   ],
+   "src": "ur5-corl-videos/bowls/ours/2_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-stack-spot",
+   "note": "SPOT, UR5 Stack D0, trial 2 (bowls/spot/2_raw.mp4), src 0.7-9.73 s at 1x: arm still until ~1.0 s, grasps the yellow bowl ~2.5-3 s, carries it over and lowers it into the blue bowl ~7-8.5 s, retracts; ends with the yellow bowl resting tilted inside the blue bowl.",
+   "poster_t": 4.07,
+   "files": [
+    {
+     "path": "media/cmp-ur5-stack-spot.v1.mp4",
+     "bytes": 726533,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 271,
+     "duration_s": 9.034
+    },
+    {
+     "path": "media/cmp-ur5-stack-spot.v1.webm",
+     "bytes": 582845,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 271,
+     "duration_s": 9.033
+    },
+    {
+     "path": "media/cmp-ur5-stack-spot.poster.webp",
+     "bytes": 34652
+    }
+   ],
+   "src": "ur5-corl-videos/bowls/spot/2_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-stack-dp",
+   "note": "Diffusion Policy, UR5 Stack D0, trial 2 (bowls/dp_bowls/2.mp4, scene camera), src 0.9-36.3 s at 4x: arm still until ~2.1 s, descends to the yellow bowl 4-19 s, lifts it ~21 s, carries it to the blue bowl and releases it beside the blue bowl ~29-31 s, retracts; ends with the bowls side by side.",
+   "poster_t": 3.98,
+   "files": [
+    {
+     "path": "media/cmp-ur5-stack-dp.v1.mp4",
+     "bytes": 720055,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 266,
+     "duration_s": 8.867
+    },
+    {
+     "path": "media/cmp-ur5-stack-dp.v1.webm",
+     "bytes": 699968,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 266,
+     "duration_s": 8.866
+    },
+    {
+     "path": "media/cmp-ur5-stack-dp.poster.webp",
+     "bytes": 35872
+    }
+   ],
+   "src": "ur5-corl-videos/bowls/dp_bowls/2.mp4",
+   "ss": 0.9,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-ur5-hook-proxy",
+   "note": "PROXY, UR5 Hook D0, trial 2 (hanger/ours/2_raw.mp4), src 0.65-9.57 s at 1x: arm still until ~0.95 s, grasps the hanger ~3 s, carries it to the rack 4-7 s, hooks it on the rack ~7.5-8 s, retracts; ends with the hanger hanging on the rack. A seated person at the right edge is visible from behind (hair only).",
+   "poster_t": 4.01,
+   "files": [
+    {
+     "path": "media/cmp-ur5-hook-proxy.v1.mp4",
+     "bytes": 756770,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 267,
+     "duration_s": 8.9
+    },
+    {
+     "path": "media/cmp-ur5-hook-proxy.v1.webm",
+     "bytes": 663609,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 267,
+     "duration_s": 8.9
+    },
+    {
+     "path": "media/cmp-ur5-hook-proxy.poster.webp",
+     "bytes": 38034
+    }
+   ],
+   "src": "ur5-corl-videos/hanger/ours/2_raw.mp4",
+   "ss": 0.65,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-hook-spot",
+   "note": "SPOT, UR5 Hook D0, trial 2 (hanger/spot/2_raw.mp4), src 0.7-11.03 s at 1x: arm still until ~1.0 s, grasps the hanger ~3-3.5 s, carries it to the rack, hooks it over the top bar ~8.5-9.5 s, retracts; ends with the hanger hanging on the rack. A seated person at the right edge is visible from behind (hair/shoulder only).",
+   "poster_t": 4.65,
+   "files": [
+    {
+     "path": "media/cmp-ur5-hook-spot.v1.mp4",
+     "bytes": 890259,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 310,
+     "duration_s": 10.334
+    },
+    {
+     "path": "media/cmp-ur5-hook-spot.v1.webm",
+     "bytes": 799190,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 310,
+     "duration_s": 10.333
+    },
+    {
+     "path": "media/cmp-ur5-hook-spot.poster.webp",
+     "bytes": 37322
+    }
+   ],
+   "src": "ur5-corl-videos/hanger/spot/2_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-hook-dp",
+   "note": "Diffusion Policy, UR5 Hook D0, trial 2 (hanger/diffusion/2.mp4, scene camera), whole recording 0-58.97 s at 4x: arm moves from ~0.6 s, works at the hanger 7-26 s, lifts it ~27 s, carries it to the rack 30-45 s and releases it ~46 s, retracts; ends with the hanger hanging on the rack.",
+   "poster_t": 6.63,
+   "files": [
+    {
+     "path": "media/cmp-ur5-hook-dp.v1.mp4",
+     "bytes": 1413053,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 442,
+     "duration_s": 14.734
+    },
+    {
+     "path": "media/cmp-ur5-hook-dp.v1.webm",
+     "bytes": 1393600,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 442,
+     "duration_s": 14.733
+    },
+    {
+     "path": "media/cmp-ur5-hook-dp.poster.webp",
+     "bytes": 36906
+    }
+   ],
+   "src": "ur5-corl-videos/hanger/diffusion/2.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 4
+  },
+  {
+   "slug": "cmp-ur5-place-proxy",
+   "note": "PROXY, UR5 Place D0, trial 2 (place/ours/2_raw.mp4), src 0.7-6.83 s at 1x: arm still until ~1.0 s, grasps the mug ~2.5-3 s, carries it to the coffee machine, sets it under the spout ~5.5-6 s, retracts; ends with the mug under the spout.",
+   "poster_t": 2.76,
+   "files": [
+    {
+     "path": "media/cmp-ur5-place-proxy.v1.mp4",
+     "bytes": 514990,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 184,
+     "duration_s": 6.134
+    },
+    {
+     "path": "media/cmp-ur5-place-proxy.v1.webm",
+     "bytes": 435489,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 184,
+     "duration_s": 6.133
+    },
+    {
+     "path": "media/cmp-ur5-place-proxy.poster.webp",
+     "bytes": 35676
+    }
+   ],
+   "src": "ur5-corl-videos/place/ours/2_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-place-spot",
+   "note": "SPOT, UR5 Place D0, trial 2 (place/spot/2_raw.mp4), src 0.7-6.67 s at 1x: arm still until ~1.0 s, grasps the mug ~2 s, carries it toward the machine, sets it down on the table left of the machine ~5.5-6 s, retracts; ends with the mug beside the machine, not under the spout.",
+   "poster_t": 2.69,
+   "files": [
+    {
+     "path": "media/cmp-ur5-place-spot.v1.mp4",
+     "bytes": 512044,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 179,
+     "duration_s": 5.967
+    },
+    {
+     "path": "media/cmp-ur5-place-spot.v1.webm",
+     "bytes": 403971,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 179,
+     "duration_s": 5.966
+    },
+    {
+     "path": "media/cmp-ur5-place-spot.poster.webp",
+     "bytes": 33424
+    }
+   ],
+   "src": "ur5-corl-videos/place/spot/2_raw.mp4",
+   "ss": 0.7,
+   "to": null,
+   "speed": 1
+  },
+  {
+   "slug": "cmp-ur5-place-dp",
+   "note": "Diffusion Policy, UR5 Place D0, trial 2 (place/diffusion/2.mp4, scene camera), whole recording 0-57.87 s at 4x: arm moves from ~0.6 s, approaches the mug 2-15 s, grasps it ~16-19 s, carries it to the machine and sets it under the spout ~21-29 s, then moves around above until the recording ends; mug stays under the spout.",
+   "poster_t": 6.51,
+   "files": [
+    {
+     "path": "media/cmp-ur5-place-dp.v1.mp4",
+     "bytes": 1004771,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 434,
+     "duration_s": 14.467
+    },
+    {
+     "path": "media/cmp-ur5-place-dp.v1.webm",
+     "bytes": 878380,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 434,
+     "duration_s": 14.466
+    },
+    {
+     "path": "media/cmp-ur5-place-dp.poster.webp",
+     "bytes": 32086
+    }
+   ],
+   "src": "ur5-corl-videos/place/diffusion/2.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 4
+  }
+ ]
+}

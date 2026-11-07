@@ -1,0 +1,63 @@
+{
+  "built_by": "tools/build_figures.sh",
+  "paper": "proxy_paper.pdf (figures are single embedded rasters, extracted with pdfimages -png)",
+  "webp": "ffmpeg libwebp -quality 88 -compression_level 6, yuv420p, lanczos downscale, never upscaled, metadata stripped",
+  "files": [
+    {
+      "path": "img/system-1200.webp",
+      "width": 1200,
+      "height": 583,
+      "bytes": 103460,
+      "source": "proxy_paper.pdf Fig. 2 (page 3), embedded raster 002, 1708x830, lanczos to 1200 px"
+    },
+    {
+      "path": "img/system-1708.webp",
+      "width": 1708,
+      "height": 830,
+      "bytes": 158542,
+      "source": "proxy_paper.pdf Fig. 2 (page 3), embedded raster 002, 1708x830 native"
+    },
+    {
+      "path": "img/diversify-1200.webp",
+      "width": 1200,
+      "height": 225,
+      "bytes": 16014,
+      "source": "proxy_paper.pdf Fig. 3 (page 4), embedded raster 004, 2344x440, lanczos to 1200 px"
+    },
+    {
+      "path": "img/diversify-2000.webp",
+      "width": 2000,
+      "height": 375,
+      "bytes": 27628,
+      "source": "proxy_paper.pdf Fig. 3 (page 4), embedded raster 004, 2344x440, lanczos to 2000 px"
+    },
+    {
+      "path": "img/generated.webp",
+      "width": 1086,
+      "height": 754,
+      "bytes": 46314,
+      "source": "Overleaf [ICRA 2027] PROXY/images/generative-videos.png, 1086x754 native (same 16 frames as the paper's 947x650 Fig. 4 raster at higher resolution; alpha fully opaque, flattened)"
+    },
+    {
+      "path": "img/tasks-1200.webp",
+      "width": 1200,
+      "height": 240,
+      "bytes": 36298,
+      "source": "proxy_paper.pdf Fig. 5 (page 7), embedded raster 008, 2338x468, lanczos to 1200 px"
+    },
+    {
+      "path": "img/tasks-2000.webp",
+      "width": 2000,
+      "height": 400,
+      "bytes": 67924,
+      "source": "proxy_paper.pdf Fig. 5 (page 7), embedded raster 008, 2338x468, lanczos to 2000 px"
+    },
+    {
+      "path": "img/scene-dist.webp",
+      "width": 1066,
+      "height": 658,
+      "bytes": 40724,
+      "source": "proxy_paper.pdf Fig. 6 (page 7), embedded raster 010, 1066x658 native"
+    }
+  ]
+}

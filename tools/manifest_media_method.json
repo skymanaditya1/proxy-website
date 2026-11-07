@@ -1,0 +1,39 @@
+{
+ "spec": "tools/clips/method.json",
+ "clips": [
+  {
+   "slug": "closed-loop",
+   "note": "Panda Pour, PROXY, annotated overlay (pouring/ours/2.mp4) 0-7.95 s, top-left 1024x576 crop so the text reads at 960 px. Green box tracks the pitcher from the start; grasp ~1-2 s; progress/iter text appears ~2.0 s; cyan GOAL box shown ~2-7.7 s while progress rises 0.009 -> 0.932 (iter 0-8); policy stops at ~7.7 s (iter 9, progress 0.915, GOAL box removed). Ends before the pitcher is carried back (~8.0 s) and later dropped (~15 s).",
+   "poster_t": 6.0,
+   "files": [
+    {
+     "path": "media/closed-loop.v1.mp4",
+     "bytes": 1019096,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 239,
+     "duration_s": 7.967
+    },
+    {
+     "path": "media/closed-loop.v1.webm",
+     "bytes": 962759,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 239,
+     "duration_s": 7.966
+    },
+    {
+     "path": "media/closed-loop.poster.webp",
+     "bytes": 32154
+    }
+   ],
+   "src": "panda_corl_videos/pouring/ours/2.mp4",
+   "ss": 0.0,
+   "to": 7.95,
+   "speed": 1,
+   "crop": "1024:576:0:0"
+  }
+ ]
+}

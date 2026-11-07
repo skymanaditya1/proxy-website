@@ -1,0 +1,94 @@
+{
+ "spec": "tools/clips/d1.json",
+ "clips": [
+  {
+   "slug": "d1-pour",
+   "note": "Panda Pour at D1 (Table II), trial 2 in all four folders (same starting layout, checked on first frames). Same rule for every tile: from just before the arm moves until its policy stops (iter counter freezes / GOAL box removed in the annotated twin) or the recording ends. TL PROXY+ wide_pour/proxyplus/2_raw 0-11.5 s: pitcher tilted with the spout over the cup ~8.5-11.2 s, policy stops 11.2 s (iter 14, progress 0.952); the gripper then releases and the pitcher falls on its side at ~11.6 s (cut). TR PROXY wide_pour/proxy/2_raw 0-11.7 s: pitcher horizontal at the cup ~8-11.4 s, policy stops 11.4 s (iter 15, progress 0.922); the carry-back to the start spot from ~11.8 s is cut. BL SPOT wide_pour/spot/2_raw 0-21.17 s (whole run): pitcher carried and tilted beside the robot base, never brought over the cup; policy still running at iter 29 when the recording ends. BR DP wide_pour/dp/2.mp4 1.95-61.0 s at 4x (640x360 15 fps source): grasps the pitcher ~2-8 s and holds it near its start until the ~60 s time limit, never pours; source has tearing bursts ~24-32 s and ~55-61 s (all paired DP trials tear similarly). Poster in the final hold.",
+   "poster_t": 21.6,
+   "files": [
+    {
+     "path": "media/d1-pour.v1.mp4",
+     "bytes": 2369491,
+     "codec": "h264",
+     "width": 1280,
+     "height": 720,
+     "frames": 665,
+     "duration_s": 22.167
+    },
+    {
+     "path": "media/d1-pour.v1.webm",
+     "bytes": 1725613,
+     "codec": "vp9",
+     "width": 1280,
+     "height": 720,
+     "frames": 665,
+     "duration_s": 22.166
+    },
+    {
+     "path": "media/d1-pour.poster.webp",
+     "bytes": 39446
+    }
+   ],
+   "grid": [
+    {
+     "src": "panda_corl_videos/wide_pour/proxyplus/2_raw.mp4",
+     "ss": 0.0,
+     "to": 11.5,
+     "speed": 1
+    },
+    {
+     "src": "panda_corl_videos/wide_pour/proxy/2_raw.mp4",
+     "ss": 0.0,
+     "to": 11.7,
+     "speed": 1
+    },
+    {
+     "src": "panda_corl_videos/wide_pour/spot/2_raw.mp4",
+     "ss": 0.0,
+     "to": null,
+     "speed": 1
+    },
+    {
+     "src": "panda_corl_videos/wide_pour/dp/2.mp4",
+     "ss": 1.95,
+     "to": null,
+     "speed": 4
+    }
+   ],
+   "hold": 1.0
+  },
+  {
+   "slug": "d1-place-proxyplus",
+   "note": "Panda Place at D1, PROXY+, raw (wide_coffee/wide/8_raw) 0-18.73 s, machine rotated relative to D0: mug grasped ~1-3 s, lifted high and carried around ~4-12 s, set on the drip tray under the spout ~13.5-16.7 s; while retracting at ~16.9-17.2 s the gripper bumps the machine and pushes machine and mug toward the camera, mug still under the spout at the end.",
+   "poster_t": 16.3,
+   "files": [
+    {
+     "path": "media/d1-place-proxyplus.v1.mp4",
+     "bytes": 1249708,
+     "codec": "h264",
+     "width": 960,
+     "height": 540,
+     "frames": 562,
+     "duration_s": 18.734
+    },
+    {
+     "path": "media/d1-place-proxyplus.v1.webm",
+     "bytes": 943568,
+     "codec": "vp9",
+     "width": 960,
+     "height": 540,
+     "frames": 562,
+     "duration_s": 18.733
+    },
+    {
+     "path": "media/d1-place-proxyplus.poster.webp",
+     "bytes": 19882
+    }
+   ],
+   "src": "panda_corl_videos/wide_coffee/wide/8_raw.mp4",
+   "ss": 0.0,
+   "to": null,
+   "speed": 1
+  }
+ ]
+}
