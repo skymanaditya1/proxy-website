@@ -160,7 +160,8 @@ figcaption .enlarge:hover { border-color: var(--ink); }
 /* ---------- masthead ---------- */
 .masthead { padding-block: 1.5rem 1rem; }
 .masthead-top { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; margin-bottom: .5rem; }
-.subtitle { font-size: clamp(1.25rem, 1.05rem + .9vw, 1.7rem); font-style: italic; font-weight: 400; color: var(--muted); margin: 0 0 1.25rem; line-height: 1.3; }
+.subtitle { font-size: clamp(1.25rem, 1.05rem + .9vw, 1.7rem); font-style: italic; font-weight: 400; color: var(--muted); margin: 0 0 1.25rem; line-height: 1.3; text-wrap: balance; }
+.nowrap { white-space: nowrap; }
 .authors { margin-bottom: .35rem; }
 .authors span { white-space: nowrap; }
 .authors .author-row { display: block; white-space: normal; }

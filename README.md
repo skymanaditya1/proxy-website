@@ -1,6 +1,6 @@
 # PROXY project page
 
-Static project page for *PROXY: Learning Object-Centric Manipulation Policies from a
+Static project page for *PROXY: Learning Relational Object-Centric Manipulation Policies from a
 Single RGB-D Image* by Maggie Huili Yao, Sahit Chintalapudi, Tiffany Zhang, Akash Anand, Megha Tippur,
 Tomás Lozano-Pérez, Leslie Pack Kaelbling and Aditya Agarwal (MIT CSAIL, Learning and
 Intelligent Systems Lab). Planned address:

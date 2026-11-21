@@ -32,7 +32,7 @@
     },
     {
       "path": "img/og.png",
-      "bytes": 358076,
+      "bytes": 365849,
       "width": 1200,
       "height": 630,
       "note": "1200x630 social card from tools/og-card.html: Newsreader title, italic subtitle, lab line, hero poster (four real PROXY runs) in a ruled plate; Chrome at 2x, lanczos to 1x; RGB"
